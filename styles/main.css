@@ -131,6 +131,9 @@ x{
 		margin-top: 20px;
 		float: none;
 	}
+	input{
+		width: 80%;
+	}
 }
 input{
 	padding: 5px 10px;
