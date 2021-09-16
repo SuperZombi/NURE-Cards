@@ -227,7 +227,7 @@ input{
 }
 #const_base_characteristics input{
 	width: 100%;
-	padding: 0;
+	padding: 0 2px 0 2px;
 	margin: 0;
 	text-align: center;
 	background: rgb(255, 255, 255, 0.4);
@@ -243,7 +243,7 @@ input{
 	width: 10%;
 }
 .minus{
-	width: 5;
+	width: 5%;
 }
 .minus svg{
 	cursor: pointer;
