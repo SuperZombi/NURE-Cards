@@ -59,5 +59,10 @@ window.onload = function(){
 	if (args.hasOwnProperty("share")){
 		document.getElementById("constructor").style.display = "none";
 		document.getElementById("share").style.display = "none";
+
+		card = document.getElementById('card').style
+		card.display = "block";
+		card.marginLeft = "auto";
+		card.marginRight = "auto";
 	}
 }
