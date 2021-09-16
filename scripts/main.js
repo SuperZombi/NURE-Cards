@@ -60,6 +60,7 @@ window.onload = async function(){
 		document.getElementById("share").style.display = "none";
 		document.getElementById("card_area").style.display = "block";
 		document.getElementById('card_area').style.textAlign = "center";
+		document.getElementById('card_area').style.transform = "scale(0.9)";
 	}
 	else{
 		document.getElementById("constructor").style.display = "block";
