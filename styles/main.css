@@ -12,6 +12,8 @@ body{
 }
 #card_area{
 	display: inline-block;
+	transform: scale(0.9);
+	transform-origin: top;
 }
 #card{
 	margin: 10px;
