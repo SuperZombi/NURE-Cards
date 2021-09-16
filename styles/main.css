@@ -144,15 +144,15 @@ x{
 }
 
 
+
 #constructor{
 	display: none;
 	background: linear-gradient(90deg, rgba(34,210,81,1) 0%, rgba(0,149,132,1) 100%);
 	width: calc(100% - 460px);
-	height: 100vh;
+	height: 100%;
 	float: right;
 	font-size: 18pt;
-	padding-left: 20px;
-	padding-top: 10px;
+	padding: 10px 5px 10px 5px;
 	font-family: 'Oswald';
 	border-radius: 10px;
 	box-shadow: 0 0 5px white;
@@ -190,6 +190,63 @@ input{
 }
 #constructor button {
 	font-size: 14pt;
-		cursor: pointer;
-		vertical-align: middle;
+	cursor: pointer;
+	vertical-align: middle;
+}
+
+
+
+#add_svg{
+	cursor: pointer;
+	height: 40px;
+	transition: 0.5s;
+	margin-left: 10px;
+	vertical-align: bottom;
+	margin-right: 3px;
+}
+#add_svg:hover{
+	transform: rotate(90deg);
+}
+#const_base_characteristics{
+	border-collapse: collapse;
+	border: 2px solid !important;
+	margin-left: 0;
+}
+#const_base_characteristics caption{
+	font-size: 21pt;
+	margin-bottom: 5px;
+}
+#const_base_characteristics th{
+	font-size: 18pt;
+}
+#const_base_characteristics tr{
+	font-size: 14pt;
+}
+#const_base_characteristics td{
+	padding: 0 10px;
+}
+#const_base_characteristics input{
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	text-align: center;
+	background: rgb(255, 255, 255, 0.4);
+}
+
+.icon{
+	width: 35%;
+}
+.characteristic_name{
+	width: 50%;
+}
+.characteristic_value{
+	width: 10%;
+}
+.minus{
+	width: 5;
+}
+.minus svg{
+	cursor: pointer;
+	height: 30px;
+	vertical-align: middle;
 }
