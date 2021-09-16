@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>NURE Cards</title>
+	<meta name="viewport" content="width=device-width">
+	<link rel="stylesheet" href="styles/main.css">
+	<script src="scripts/main.js"></script>
+	<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+</head>
+<body>
+	<div class="card">
+		<div class="img_zone">
+			<img id="main_img" src="https://nure.ua/wp-content/uploads/Employees_photo/Zolotukhin_OV.jpg">
+		</div>
+		<div id="stars">
+			<img src="https://rerollcdn.com/SDSGC/ui/skill_star.png">
+			<img src="https://rerollcdn.com/SDSGC/ui/skill_star.png">
+			<img src="https://rerollcdn.com/SDSGC/ui/skill_star.png">
+			<img src="https://rerollcdn.com/SDSGC/ui/skill_star.png">
+			<img src="https://rerollcdn.com/SDSGC/ui/skill_star.png">
+		</div>
+		<div class="name" id="name">Золотухин</div>
+		<hr>
+		<table align="center" class="characteristics">
+			<tr>
+				<td>
+					<img src="https://img.icons8.com/ios/500/sword.png">
+				</td>
+				<td>
+					Сила атаки
+				</td>
+				<td>
+					10
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<img src="https://ru.seaicons.com/wp-content/uploads/2015/11/Security-Shield-icon.png">
+				</td>
+				<td>
+					Защита
+				</td>
+				<td>
+					5
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<img src="https://cdn-icons-png.flaticon.com/512/3204/3204021.png">
+				</td>
+				<td>
+					Магия
+				</td>
+				<td>
+					100
+				</td>
+			</tr>
+		</table>
+		<hr>
+		<div class="pasives">
+			<span>Пасивные навыки:</span>
+			<table>
+				<tr>
+					<td>
+						<img src="https://st3.depositphotos.com/1000193/35528/v/600/depositphotos_355289004-stock-illustration-human-foot-prints-path-is.jpg">
+					</td>
+					<td>
+						Может не приходить на пары
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<img src="https://i.pinimg.com/736x/2a/ec/b9/2aecb93a75d08bbebec5800b1cfa59a3.jpg">
+					</td>
+					<td>
+						Проверяет лабы со скоростью 1<x>лаба/сек</x>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<img src="https://icons-for-free.com/iconfiles/png/512/internet+line+icon-1320184094877805974.png">
+					</td>
+					<td>
+						Может использовать способность "Плохой интернет"
+					</td>
+				</tr>
+
+			</table>
+		</div>
+	</div>
+
+
+
+
+<div id="constructor">
+	<table>
+		<tr>
+			<td>Имя:</td>
+			<td>
+				<input id="input_name" type="text" placeholder="Имя" onkeyup="change('name')">
+			</td>
+		</tr>
+		<tr>
+			<td>Главная картинка:</td>
+			<td>
+				<input id="input_image" type="text" placeholder="Ссылка" onkeyup="change('image')">
+			</td>
+		</tr>
+		<tr>
+			<td>Редкость:</td>
+			<td>
+				<button type="button" onclick="this.nextElementSibling.stepDown(); change('stars')">-</button>
+				<input id="input_stars" class="raz" type="number" min="1" value="1" readonly>
+				<button type="button" onclick="this.previousElementSibling.stepUp(); change('stars')">+</button>
+			</td>
+		</tr>
+	</table>
+</div>
+</body>
+</html>
