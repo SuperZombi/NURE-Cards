@@ -54,15 +54,18 @@ function load_args(){
 	}
 }
 
-window.onload = function(){
-	load_args()
+window.onload = async function(){
+	await load_args()
 	if (args.hasOwnProperty("share")){
-		document.getElementById("constructor").style.display = "none";
 		document.getElementById("share").style.display = "none";
-
-		card = document.getElementById('card').style
-		card.display = "block";
-		card.marginLeft = "auto";
-		card.marginRight = "auto";
+		document.getElementById("card_area").style.display = "block";
+		document.getElementById('card_area').style.textAlign = "center";
 	}
+	else{
+		document.getElementById("constructor").style.display = "block";
+		document.getElementById("share").style.display = "block";
+	}
+	document.getElementById("card").style.opacity = "1";
+	document.getElementById("card_front").style.transform = "rotateY(0deg)"
+	document.getElementById("card_back").style.transform = "rotateY(-180deg)"
 }
