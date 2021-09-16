@@ -166,7 +166,7 @@ window.onload = async function(){
 		document.getElementById("share").style.display = "none";
 		document.getElementById("card_area").style.display = "block";
 		document.getElementById('card_area').style.textAlign = "center";
-		document.getElementById('card_area').style.transform = "scale(0.9)";
+		document.getElementById('card_area').style.transform = "scale(0.95)";
 	}
 	else{
 		document.getElementById("constructor").style.display = "block";
@@ -177,4 +177,16 @@ window.onload = async function(){
 	document.getElementById("card_back").style.transform = "rotateY(-180deg)"
 
 	window.addEventListener("hashchange", function(){load_args();});
+	window.addEventListener("resize", function(){ check_widht() });
+	check_widht()
+}
+function check_widht(){
+	if (window.innerWidth > 850){
+		document.getElementById("card_front").style.maxWidth = "410px";
+		document.getElementById("card").style.margin = "10px";
+	}
+	else{
+		document.getElementById("card_front").style.maxWidth = "100vw";
+		document.getElementById("card").style.margin = "0";
+	}	
 }
