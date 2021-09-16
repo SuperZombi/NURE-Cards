@@ -68,4 +68,6 @@ window.onload = async function(){
 	document.getElementById("card").style.opacity = "1";
 	document.getElementById("card_front").style.transform = "rotateY(0deg)"
 	document.getElementById("card_back").style.transform = "rotateY(-180deg)"
+
+	window.addEventListener("hashchange", function(){location.reload();});
 }
