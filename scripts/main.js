@@ -57,6 +57,7 @@ function load_args(){
 window.onload = function(){
 	load_args()
 	if (args.hasOwnProperty("share")){
-		document.getElementById("constructor").style.display = "none"
+		document.getElementById("constructor").style.display = "none";
+		document.getElementById("share").style.display = "none";
 	}
 }
