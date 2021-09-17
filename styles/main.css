@@ -181,6 +181,13 @@ hr{
 	input{
 		width: 80%;
 	}
+	#header{
+		text-align: center;
+	}
+	#card_area{
+		display: block;
+		text-align: center;
+	}
 }
 input{
 	padding: 5px 10px;
