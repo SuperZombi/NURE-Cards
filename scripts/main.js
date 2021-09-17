@@ -34,20 +34,43 @@ function change(arg) {
 			delete args["characteristics"]
 		}
 	}
+	if (arg == "pasives"){
+		cleanArray = []
+		Object.keys(pasives).forEach(function (key){
+			temp = Object.values(pasives[key]).filter(word => word != "")
+			if (temp.length > 0){
+				cleanArray.push(pasives[key])
+			}
+		})
+		if (cleanArray.length > 0){
+			args["pasives"] = cleanArray
+		}
+		else{
+			delete args["pasives"]
+		}
+		console.log(args)
+	}
 	update_href()
 }
 
+
+var timout_id;
 function update_href(){
 	new_link = ""
 	Object.keys(args).forEach(function (key){
-		if (key == "characteristics"){
+		if (key == "characteristics" || key == "pasives"){
 			new_link += `?${key}=${JSON.stringify(args[key])}`
 		}
 		else{
 			new_link += `?${key}=${args[key]}`
 		}
 	});
-	location.hash = new_link
+	if (timout_id) {
+		clearTimeout(timout_id);
+	}
+	timout_id = setTimeout(function(){
+		location.hash = new_link
+	}, 1000);
 }
 
 function load_args(){
@@ -72,15 +95,30 @@ function load_args(){
 			document.getElementById('stars').innerHTML += '<img src="https://rerollcdn.com/SDSGC/ui/skill_star.png">'
 		}
 	}
+	if (args.hasOwnProperty("characteristics")){
+		args['characteristics'] = eval(args['characteristics'])
+		characteristics = args['characteristics']
+	}
+	if (args.hasOwnProperty("pasives")){
+		args['pasives'] = eval(args['pasives'])
+		pasives = args['pasives']
+	}
 	if (first_time){
 		if (args.hasOwnProperty("characteristics")){
-			args['characteristics'] = eval(args['characteristics'])
-			characteristics = args['characteristics']
 			for (i=0; i < args['characteristics'].length; i++) {
 				add_new_tth(
 					image = args['characteristics'][i]['icon'],
 					title = args['characteristics'][i]['name'],
 					value = args['characteristics'][i]['value']
+				)
+			}
+		}
+
+		if (args.hasOwnProperty("pasives")){
+			for (i=0; i < args['pasives'].length; i++) {
+				add_new_passive(
+					image_ico = args['pasives'][i]['icon'],
+					description = args['pasives'][i]['description']
 				)
 			}
 		}
@@ -158,7 +196,74 @@ function edit(argument1, argument2, iter) {
 }
 
 
+iterator_pas = 0;
+function add_new_passive(image_ico="", description=""){
+	image_2 = ""
+	if (image_ico){
+		image_2 = `<img src="${image_ico}">`
+	}
+	iterator_pas += 1;
+	var tr2 = document.createElement('tr')
+	tr2.innerHTML = `
+	<tr>
+		<td>${image_2}</td>
+		<td>${description}</td>
+	</tr>`
+	document.getElementById('pasives').appendChild(tr2)
+
+	function temp(className, x) {
+		var td1 = document.createElement('td')
+		var cur_i = iterator_pas
+		td1.className = className
+		input = document.createElement('input')
+		input.onkeyup = function(){edit2(tr2, td1, cur_i)}
+		input.value = x
+		td1.appendChild(input)
+		tr.appendChild(td1)
+	}
+
+	tr = document.createElement('tr')
+	temp("icon", image_ico)
+	temp("description", description)
+
+	td = document.createElement('td')
+	td.className = "minus"
+	td.innerHTML = `<span title="Удалить"><svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/></svg></span>`
+	td.onclick = function(){
+		this.parentNode.remove();
+		tr2.remove();
+		delete_from_arr2(this.parentNode)
+	}
+	tr.appendChild(td)
+	tr.setAttribute('i', iterator_pas)
+	document.getElementById('const_passives').appendChild(tr)	
+}
+function delete_from_arr2(i){
+	delete pasives[i.getAttribute("i")-1]
+	change("pasives")
+}
+function edit2(argument1, argument2, iter) {
+	dst1 = argument1.getElementsByTagName('td')
+
+	if (argument2.className == "icon"){
+		dst1[0].innerHTML = `<img src="${argument2.getElementsByTagName('input')[0].value}">`
+	}
+	if (argument2.className == "description"){
+		dst1[1].innerHTML = argument2.getElementsByTagName('input')[0].value
+	}
+
+	try{
+		img = dst1[0].getElementsByTagName('img')[0].src
+	}
+	catch{ img = "" }
+	pasives[iter-1] = {"description":dst1[1].innerHTML, "icon":img}	
+	change("pasives")
+}
+
+
+
 characteristics = []
+pasives = []
 window.onload = async function(){
 	first_time = true;
 	await load_args()
