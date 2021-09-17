@@ -260,6 +260,10 @@ function edit2(argument1, argument2, iter) {
 	change("pasives")
 }
 
+function go_to_editor(){
+	window.location.href = window.location.href.split("?share")[0]
+	location.reload()
+}
 
 
 characteristics = []
@@ -272,6 +276,14 @@ window.onload = async function(){
 		document.getElementById("card_area").style.display = "block";
 		document.getElementById('card_area').style.textAlign = "center";
 		document.getElementById('card_area').style.transform = "scale(0.95)";
+		ads_ = document.getElementById("ads").style
+		ads_.display = "block";
+		ads_.opacity = 0;
+		setTimeout(function() {
+			ads_.opacity = "";
+			ads_.transform = "translateY(0)";
+			ads_.transition = "0.6s";
+		}, 3000)
 	}
 	else{
 		document.getElementById("constructor").style.display = "block";
