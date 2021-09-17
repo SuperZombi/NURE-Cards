@@ -272,7 +272,6 @@ window.onload = async function(){
 	await load_args()
 	if (args.hasOwnProperty("share")){
 		document.title = args["name"] + " - NURE Cards"
-		document.getElementById("share").style.display = "none";
 		document.getElementById("card_area").style.display = "block";
 		document.getElementById('card_area').style.textAlign = "center";
 		document.getElementById('card_area').style.transform = "scale(0.95)";
@@ -287,7 +286,7 @@ window.onload = async function(){
 	}
 	else{
 		document.getElementById("constructor").style.display = "block";
-		document.getElementById("share").style.display = "block";
+		document.getElementById("header").style.display = "block";
 	}
 	document.getElementById("card").style.opacity = "1";
 	document.getElementById("card_front").style.transform = "rotateY(0deg)"
