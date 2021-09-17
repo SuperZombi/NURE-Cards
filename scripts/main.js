@@ -48,7 +48,6 @@ function change(arg) {
 		else{
 			delete args["pasives"]
 		}
-		console.log(args)
 	}
 	update_href()
 }
@@ -272,6 +271,7 @@ window.onload = async function(){
 	first_time = true;
 	await load_args()
 	if (args.hasOwnProperty("share")){
+		document.title = args["name"] + " - NURE Cards"
 		document.getElementById("share").style.display = "none";
 		document.getElementById("card_area").style.display = "block";
 		document.getElementById('card_area').style.textAlign = "center";
