@@ -279,9 +279,8 @@ window.onload = async function(){
 		ads_.display = "block";
 		ads_.opacity = 0;
 		setTimeout(function() {
-			ads_.opacity = "";
-			ads_.transform = "translateY(0)";
-			ads_.transition = "0.6s";
+			window.addEventListener("scroll", function(){ check_scroll() });
+			check_scroll()
 		}, 3000)
 	}
 	else{
@@ -296,6 +295,18 @@ window.onload = async function(){
 	window.addEventListener("resize", function(){ check_widht() });
 	check_widht()
 }
+function check_scroll() {
+	ads_ = document.getElementById("ads").style;
+	if(window.scrollY + window.innerHeight >= document.documentElement.scrollHeight) {
+		ads_.opacity = "";
+		ads_.transform = "translateY(0)";
+	}
+	else{
+		ads_.opacity = 0;
+		ads_.transform = "translateY(60px)";
+	}
+}
+
 function check_widht(){
 	if (window.innerWidth > 850){
 		document.getElementById("card_front").style.maxWidth = "410px";
