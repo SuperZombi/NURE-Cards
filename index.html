@@ -25,33 +25,7 @@
 			<hr>
 			<div class="pasives">
 				<span>Пасивные навыки:</span>
-				<table>
-					<tr>
-						<td>
-							<img src="https://st3.depositphotos.com/1000193/35528/v/600/depositphotos_355289004-stock-illustration-human-foot-prints-path-is.jpg">
-						</td>
-						<td>
-							Может не приходить на пары
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<img src="https://i.pinimg.com/736x/2a/ec/b9/2aecb93a75d08bbebec5800b1cfa59a3.jpg">
-						</td>
-						<td>
-							Проверяет лабы со скоростью 1<x>лаба/сек</x>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<img src="https://icons-for-free.com/iconfiles/png/512/internet+line+icon-1320184094877805974.png">
-						</td>
-						<td>
-							Может использовать способность "Плохой интернет"
-						</td>
-					</tr>
-
-				</table>
+				<table id="pasives"></table>
 			</div>
 		</div>
 		<div id="card_back" class="card">
@@ -87,12 +61,21 @@
 	</table>
 	<hr>
 	<table class="characteristics" id="const_base_characteristics">
-		<caption><span title="Добавить"><svg onclick="add_new_tth()" id="add_svg" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></span>
+		<caption><span title="Добавить"><svg onclick="add_new_tth()" class="add_svg" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></span>
 		Основные:</caption>
 		<tr>
 			<th>Иконка</th>
 			<th>Характеристика</th>
 			<th>Сила</th>
+		</tr>
+	</table>
+	<hr style="margin-top: 50px;">
+	<table class="characteristics" id="const_passives">
+		<caption><span title="Добавить"><svg onclick="add_new_passive()" class="add_svg" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></span>
+		Пасивки:</caption>
+		<tr>
+			<th>Иконка</th>
+			<th>Описание</th>
 		</tr>
 	</table>
 </div>
