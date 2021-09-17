@@ -58,7 +58,7 @@ function update_href(){
 	new_link = ""
 	Object.keys(args).forEach(function (key){
 		if (key == "characteristics" || key == "pasives"){
-			new_link += `?${key}=${JSON.stringify(args[key]).replaceAll('"', "'")}`
+			new_link += `?${key}=${JSON.stringify(args[key])}`
 		}
 		else{
 			new_link += `?${key}=${args[key]}`
