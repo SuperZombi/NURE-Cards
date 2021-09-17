@@ -294,9 +294,9 @@ input{
 	bottom: 0;
 	text-align: center;
 	display: none;
-	opacity: 0.5;
-	transition: 1s;
-	transform: translateY(100px);
+	opacity: 0.8;
+	transition: 0.6s;
+	transform: translateY(60px);
 	z-index: 6;
 }
 #ads:hover{
