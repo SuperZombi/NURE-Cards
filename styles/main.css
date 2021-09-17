@@ -282,7 +282,7 @@ input{
 
 #ads{
 	width: 100%;
-	height: 60px;
+	height: 55px;
 	background: linear-gradient(180deg, rgba(67,68,69,.1) 0%, rgba(0,101,89,.2) 100%);
 	position: fixed;
 	bottom: 0;
