@@ -5,12 +5,18 @@
 body{
 	background-color: #202124;
 }
-#share{
-	height: 40px;
+#header{
+	width: 100%;
 	display: none;
-	margin-left: 10px;
-	cursor: pointer;
 }
+#header img{
+	height: 40px;
+	display: inline-block;
+	margin-left: 20px;
+	cursor: pointer;
+	filter: drop-shadow(0 0 1px white);
+}
+
 #card_area{
 	display: inline-block;
 	transform-origin: top;
