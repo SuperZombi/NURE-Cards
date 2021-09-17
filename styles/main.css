@@ -2,6 +2,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500&display=swap');
 
+/* User Tags */
+cur{
+	font-size: 12pt;
+	font-style: italic;
+	white-space: nowrap;
+}
+rav:before{
+	content: "=";
+}
+
+
+
 body{
 	background-color: #202124;
 }
@@ -143,11 +155,6 @@ hr{
 	vertical-align: middle;
 	border-radius: 50px;
 	background-color: white;
-}
-cur{
-	font-size: 12pt;
-	font-style: italic;
-	white-space: nowrap;
 }
 
 
