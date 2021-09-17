@@ -137,7 +137,7 @@ hr{
 	border-radius: 50px;
 	background-color: white;
 }
-x{
+cur{
 	font-size: 12pt;
 	font-style: italic;
 	white-space: nowrap;
@@ -196,7 +196,7 @@ input{
 
 
 
-#add_svg{
+.add_svg{
 	cursor: pointer;
 	height: 40px;
 	transition: 0.5s;
@@ -204,7 +204,7 @@ input{
 	vertical-align: bottom;
 	margin-right: 3px;
 }
-#add_svg:hover{
+.add_svg:hover{
 	transform: rotate(90deg);
 }
 #const_base_characteristics{
@@ -249,4 +249,30 @@ input{
 	cursor: pointer;
 	height: 30px;
 	vertical-align: middle;
+}
+
+#const_passives{
+	border-collapse: collapse;
+	border: 2px solid !important;
+	margin-left: 0;
+}
+#const_passives caption{
+	font-size: 21pt;
+	margin-bottom: 5px;
+}
+#const_passives td{
+	padding: 0 10px;
+}
+#const_passives input{
+	width: 100%;
+	padding: 0 2px 0 2px;
+	margin: 0;
+	text-align: center;
+	background: rgb(255, 255, 255, 0.4);
+}
+.pasives_icon{
+	width: 35%;
+}
+.pasives_text{
+	width: 60%;
 }
