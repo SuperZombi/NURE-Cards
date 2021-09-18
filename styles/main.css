@@ -267,11 +267,11 @@ hr{
 	#menu{
 		width: 100%;
 		left: 0;
-		bottom: -100%;
+		top: 100%;
 		border-radius: 25px 25px 0 0;
 	}
 	.menu_showed{
-		bottom: 0 !important;
+		top: 7.5% !important;
 	}
 }
 
