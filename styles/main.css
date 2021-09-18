@@ -32,10 +32,10 @@ body{
 	cursor: pointer;
 	display: inline-block;
 	vertical-align: middle;
+	filter: drop-shadow(0 0 1px white);
 }
 #header img{
 	height: 40px;
-	filter: drop-shadow(0 0 1px white);
 }
 .menu_but:before,.menu_but:after,.menu_but div {
 	background: #fff;
