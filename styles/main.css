@@ -14,7 +14,9 @@ rav:before{
 }
 
 
-
+:root{
+	scroll-behavior: smooth;
+}
 body{
 	background-color: #202124;
 }
