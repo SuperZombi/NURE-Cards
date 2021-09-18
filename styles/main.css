@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 
 /* User Tags */
 cur{
@@ -70,6 +71,7 @@ body{
 	transition: 0.5s;
 }
 #menu{
+	font-family: 'Ubuntu';
 	display: none;
 	height: 92.5%;
 	width: 50%;
@@ -89,6 +91,7 @@ body{
 
 
 #card_area{
+	font-family: 'Balsamiq Sans';
 	display: inline-block;
 	transform-origin: top;
 }
