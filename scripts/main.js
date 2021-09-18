@@ -275,6 +275,7 @@ window.onload = async function(){
 		document.getElementById("card_area").style.display = "block";
 		document.getElementById('card_area').style.textAlign = "center";
 		document.getElementById('card_area').style.transform = "scale(0.95)";
+		document.getElementById('card_area').style.marginBottom = "20px";
 		ads_ = document.getElementById("ads").style
 		ads_.display = "block";
 		ads_.opacity = 0;
