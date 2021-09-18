@@ -18,16 +18,75 @@ body{
 	background-color: #202124;
 }
 #header{
-	width: 100%;
+	width: 99%;
 	display: none;
+}
+#header:first-child{
+	margin-left: 10px;
+}
+#header > *{
+	margin-left: 15px;
+	cursor: pointer;
+	display: inline-block;
+	vertical-align: middle;
 }
 #header img{
 	height: 40px;
-	display: inline-block;
-	margin-left: 20px;
-	cursor: pointer;
 	filter: drop-shadow(0 0 1px white);
 }
+.menu_but:before,.menu_but:after,.menu_but div {
+	background: #fff;
+	content: "";
+	display: block;
+	height: 4px;
+	width: 35px;
+	border-radius: 3px;
+	margin: 8px 0;
+	transition: 0.5s;
+}
+.menu_but:hover:before,.menu_but:hover:after,.menu_but:hover div{
+	background-color: yellow;
+	width: 44px;
+}
+
+.menu_active:hover:before,.menu_active:hover:after,.menu_active:hover div{
+	background-color: darkred;
+	width: 35px;
+}
+.menu_active:before {
+	transform: translateY(12px) translateX(5px) rotate(135deg);
+	background-color: red;
+}
+.menu_active:after {
+	transform: translateY(-12px) translateX(5px) rotate(-135deg);
+	background-color: red;
+}
+.menu_active div {
+	transform: scale(0);
+}
+
+
+#other{
+	transition: 0.5s;
+}
+#menu{
+	display: none;
+	height: 92.5%;
+	width: 50%;
+	background-color: lightblue;
+	position: fixed;
+	z-index: 7;
+	left: -100%;
+	transition: 0.5s;
+	border-radius: 0 25px 25px 0;
+	text-align: center;
+}
+.menu_showed{
+	left: 0 !important;
+}
+
+
+
 
 #card_area{
 	display: inline-block;
@@ -160,6 +219,8 @@ hr{
 
 
 
+
+
 #constructor{
 	display: none;
 	background: linear-gradient(90deg, rgba(34,210,81,1) 0%, rgba(0,149,132,1) 100%);
@@ -173,6 +234,11 @@ hr{
 	box-shadow: 0 0 5px white;
 	margin-top: 5px;
 }
+
+
+
+
+/* Phone screen */
 @media all and (max-width: 900px) {
 	#constructor{
 		width: 97%;
@@ -184,12 +250,29 @@ hr{
 	}
 	#header{
 		text-align: center;
+		margin-bottom: 5px;
+	}
+	#header:first-child{
+		margin-left: 0;
 	}
 	#card_area{
 		display: block;
 		text-align: center;
 	}
+	#menu{
+		width: 100%;
+		left: 0;
+		bottom: -100%;
+		border-radius: 25px 25px 0 0;
+	}
+	.menu_showed{
+		bottom: 0 !important;
+	}
 }
+
+
+
+
 input{
 	padding: 5px 10px;
 	border: none;
@@ -332,9 +415,9 @@ input{
 	color: white;
 }
 #ads button:hover{
-  border-color: yellow !important;
-  cursor: pointer;
-  padding: 5px 50px;
+	border-color: yellow !important;
+	cursor: pointer;
+	padding: 5px 50px;
 }
 #ads button:active{
 	border-color: green !important;
