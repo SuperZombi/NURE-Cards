@@ -268,6 +268,7 @@ function go_to_editor(){
 
 
 async function show_menu() {
+	window.scrollTo(0, 0)
 	but = document.getElementsByClassName("menu_but")[0]
 	but.className = "menu_but menu_active"
 	but.title = "Закрыть"
@@ -322,7 +323,7 @@ window.onload = async function(){
 		setTimeout(function() {
 			window.addEventListener("scroll", function(){ check_scroll() });
 			check_scroll()
-		}, 3000)
+		}, 2500)
 	}
 	else{
 		document.getElementById("constructor").style.display = "block";
@@ -338,7 +339,7 @@ window.onload = async function(){
 }
 function check_scroll() {
 	ads_ = document.getElementById("ads").style;
-	if(window.scrollY + window.innerHeight + 1 >= document.documentElement.scrollHeight) {
+	if(window.scrollY + window.innerHeight + 5 >= document.documentElement.scrollHeight) {
 		ads_.opacity = "";
 		ads_.transform = "translateY(0)";
 	}
