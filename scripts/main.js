@@ -265,6 +265,46 @@ function go_to_editor(){
 }
 
 
+
+
+async function show_menu() {
+	but = document.getElementsByClassName("menu_but")[0]
+	but.className = "menu_but menu_active"
+	but.title = "Закрыть"
+	but.onclick = close_menu
+
+	document.getElementById("menu").style.display = "block"
+	setTimeout(function() {
+		document.getElementById("menu").className = "menu_showed"
+	},0)
+	
+	document.body.style.overflow = "hidden"
+	other = document.getElementById("other").style
+	other.pointerEvents = "none";
+	other.filter = "blur(5px)";
+	other.userSelect = "none";
+}
+async function close_menu(){
+	but = document.getElementsByClassName("menu_but")[0]
+	but.className = "menu_but"
+	but.title = "Меню"
+	but.onclick = show_menu
+
+	document.getElementById("menu").className = ""
+	
+	other = document.getElementById("other").style
+	other.pointerEvents = "auto";
+	other.filter = "blur(0px)";
+	other.userSelect = "auto";
+	document.body.style.overflow = "auto"
+
+	setTimeout(function() {
+		document.getElementById("menu").style.display = "none"
+	}, 500)
+}
+
+
+
 characteristics = []
 pasives = []
 window.onload = async function(){
