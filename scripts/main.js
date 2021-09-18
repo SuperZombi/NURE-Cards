@@ -297,7 +297,7 @@ window.onload = async function(){
 }
 function check_scroll() {
 	ads_ = document.getElementById("ads").style;
-	if(window.scrollY + window.innerHeight >= document.documentElement.scrollHeight) {
+	if(window.scrollY + window.innerHeight + 1 >= document.documentElement.scrollHeight) {
 		ads_.opacity = "";
 		ads_.transform = "translateY(0)";
 	}
