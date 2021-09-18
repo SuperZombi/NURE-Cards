@@ -137,6 +137,7 @@ hr{
 	border-collapse: collapse;
 	text-align: left;
 	font-size: 14pt;
+	width: 100%;
 }
 .pasives td{
 	padding: 8px;
