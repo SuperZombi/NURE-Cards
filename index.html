@@ -9,82 +9,92 @@
 </head>
 <body>
 <div id="header">
+	<div class="menu_but" title="Меню" onclick="show_menu()"><div></div></div>
 	<img title="Скопировать ссылку" onclick="share()" src="https://img.icons8.com/color/144/000000/share--v1.png"/>
 	<a href="https://www.donationalerts.com/r/super_zombi" target="_blank">
 		<img title="Задонатить" src="https://iconape.com/wp-content/png_logo_vector/donate.png">
 	</a>
 </div>
 
-<div id="card_area">
-	<div id="card">
-		<div id="card_front" class="card">
-			<div class="img_zone">
-				<img id="main_img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1200px-No-Image-Placeholder.svg.png">
+<div id="menu">
+	<h1>Главное меню</h1>
+	<h2>Тут пока ничего нет</h2>
+	<h3>Зачем ты сюда зашёл?</h3>
+	<img src="https://memepedia.ru/wp-content/uploads/2019/07/vyydi-otsyuda-razboynik-3.jpg" width="80%">
+</div>
+
+
+<div id="other">
+	<div id="card_area">
+		<div id="card">
+			<div id="card_front" class="card">
+				<div class="img_zone">
+					<img id="main_img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1200px-No-Image-Placeholder.svg.png">
+				</div>
+				<div id="stars">
+					<img src="https://rerollcdn.com/SDSGC/ui/skill_star.png">
+				</div>
+				<div class="name" id="name"></div>
+				<hr>
+				<table align="center" class="characteristics" id="characteristics"></table>
+				<hr>
+				<div class="pasives">
+					<span>Пассивные навыки:</span>
+					<table id="pasives"></table>
+				</div>
 			</div>
-			<div id="stars">
-				<img src="https://rerollcdn.com/SDSGC/ui/skill_star.png">
+			<div id="card_back" class="card">
+				<img src="https://i.pinimg.com/originals/38/52/18/385218163958b5817ded6373dd9f01a6.png">
 			</div>
-			<div class="name" id="name"></div>
-			<hr>
-			<table align="center" class="characteristics" id="characteristics"></table>
-			<hr>
-			<div class="pasives">
-				<span>Пассивные навыки:</span>
-				<table id="pasives"></table>
-			</div>
-		</div>
-		<div id="card_back" class="card">
-			<img src="https://i.pinimg.com/originals/38/52/18/385218163958b5817ded6373dd9f01a6.png">
 		</div>
 	</div>
+
+
+
+	<div id="constructor">
+		<table>
+			<tr>
+				<td>Имя:</td>
+				<td>
+					<input id="input_name" type="text" placeholder="Имя" onkeyup="change('name')">
+				</td>
+			</tr>
+			<tr>
+				<td>Главная картинка:</td>
+				<td>
+					<input id="input_image" type="text" placeholder="Ссылка" onkeyup="change('image')">
+				</td>
+			</tr>
+			<tr>
+				<td>Редкость:</td>
+				<td>
+					<button type="button" onclick="this.nextElementSibling.stepDown(); change('stars')">-</button>
+					<input id="input_stars" class="raz" type="number" min="1" max="10" value="1" readonly>
+					<button type="button" onclick="this.previousElementSibling.stepUp(); change('stars')">+</button>
+				</td>
+			</tr>
+		</table>
+		<hr>
+		<table class="characteristics" id="const_base_characteristics">
+			<caption><span title="Добавить"><svg onclick="add_new_tth()" class="add_svg" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></span>
+			Основные:</caption>
+			<tr>
+				<th>Иконка</th>
+				<th>Характеристика</th>
+				<th>Сила</th>
+			</tr>
+		</table>
+		<hr style="margin-top: 50px;">
+		<table class="characteristics" id="const_passives">
+			<caption><span title="Добавить"><svg onclick="add_new_passive()" class="add_svg" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></span>
+			Пассивки:</caption>
+			<tr>
+				<th>Иконка</th>
+				<th>Описание</th>
+			</tr>
+		</table>
+	</div>
 </div>
-
-
-
-<div id="constructor">
-	<table>
-		<tr>
-			<td>Имя:</td>
-			<td>
-				<input id="input_name" type="text" placeholder="Имя" onkeyup="change('name')">
-			</td>
-		</tr>
-		<tr>
-			<td>Главная картинка:</td>
-			<td>
-				<input id="input_image" type="text" placeholder="Ссылка" onkeyup="change('image')">
-			</td>
-		</tr>
-		<tr>
-			<td>Редкость:</td>
-			<td>
-				<button type="button" onclick="this.nextElementSibling.stepDown(); change('stars')">-</button>
-				<input id="input_stars" class="raz" type="number" min="1" max="10" value="1" readonly>
-				<button type="button" onclick="this.previousElementSibling.stepUp(); change('stars')">+</button>
-			</td>
-		</tr>
-	</table>
-	<hr>
-	<table class="characteristics" id="const_base_characteristics">
-		<caption><span title="Добавить"><svg onclick="add_new_tth()" class="add_svg" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></span>
-		Основные:</caption>
-		<tr>
-			<th>Иконка</th>
-			<th>Характеристика</th>
-			<th>Сила</th>
-		</tr>
-	</table>
-	<hr style="margin-top: 50px;">
-	<table class="characteristics" id="const_passives">
-		<caption><span title="Добавить"><svg onclick="add_new_passive()" class="add_svg" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></span>
-		Пассивки:</caption>
-		<tr>
-			<th>Иконка</th>
-			<th>Описание</th>
-		</tr>
-	</table>
-</div>
-
 
 
 <div id="ads">
