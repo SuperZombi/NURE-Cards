@@ -342,6 +342,7 @@ window.onload = async function(){
 	else{
 		document.getElementById("constructor").style.display = "block";
 		document.getElementById("header").style.display = "block";
+		document.getElementById("notifications").style.display = "block";
 	}
 	document.getElementById("card").style.opacity = "1";
 	document.getElementById("card_front").style.transform = "rotateY(0deg)"
