@@ -344,7 +344,7 @@ hr{
 
 #constructor{
 	display: none;
-	background: linear-gradient(90deg, rgba(199,34,210,1) 0%, rgba(0,149,132,1) 100%);
+	background: linear-gradient(90deg, rgba(0,169,217,1) 0%, rgba(0,149,132,1) 80%);
 	width: calc(100% - 460px);
 	height: 100%;
 	float: right;
@@ -384,7 +384,7 @@ hr{
 		width: 100%;
 		left: 0;
 		bottom: -100%;
-		height: 92%;
+		height: 91.5%;
 		border-radius: 20px 20px 0 0;
 	}
 	#menu::-webkit-scrollbar-track
