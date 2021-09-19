@@ -1,6 +1,6 @@
-function share(){
+async function share(){
 	navigator.clipboard.writeText(window.location.href + "?share")
-	alert("Ссылка скопирована!")
+	await Success("Ссылка скопирована!")
 }
 
 function change(arg) {
@@ -267,6 +267,7 @@ function go_to_editor(){
 
 
 
+var timout_menu;
 async function show_menu() {
 	window.scrollTo(0, 0)
 	but = document.getElementsByClassName("menu_but")[0]
@@ -275,6 +276,9 @@ async function show_menu() {
 	but.onclick = close_menu
 
 	document.getElementById("menu").style.display = "block"
+	if (timout_menu) {
+		clearTimeout(timout_menu);
+	}
 	setTimeout(function() {
 		document.getElementById("menu").className = "menu_showed"
 	},0)
@@ -282,8 +286,12 @@ async function show_menu() {
 	document.body.style.overflow = "hidden"
 	other = document.getElementById("other").style
 	other.pointerEvents = "none";
-	other.filter = "blur(5px)";
 	other.userSelect = "none";
+	if (window.innerWidth > 850){
+		timout_menu = setTimeout(function(){
+			other.filter = "blur(5px)";
+		},300)
+	}
 }
 async function close_menu(){
 	but = document.getElementsByClassName("menu_but")[0]
@@ -299,9 +307,13 @@ async function close_menu(){
 	other.userSelect = "auto";
 	document.body.style.overflow = "auto"
 
-	setTimeout(function() {
+
+	if (timout_menu) {
+		clearTimeout(timout_menu);
+	}
+	timout_menu = setTimeout(function(){
 		document.getElementById("menu").style.display = "none"
-	}, 500)
+	}, 500);
 }
 
 
@@ -309,6 +321,8 @@ async function close_menu(){
 characteristics = []
 pasives = []
 window.onload = async function(){
+	notifications_element = document.getElementById('notifications')
+	
 	first_time = true;
 	await load_args()
 	if (args.hasOwnProperty("share")){
@@ -323,7 +337,7 @@ window.onload = async function(){
 		setTimeout(function() {
 			window.addEventListener("scroll", function(){ check_scroll() });
 			check_scroll()
-		}, 2500)
+		}, 2000)
 	}
 	else{
 		document.getElementById("constructor").style.display = "block";
@@ -336,16 +350,34 @@ window.onload = async function(){
 	window.addEventListener("hashchange", function(){load_args();});
 	window.addEventListener("resize", function(){ check_widht() });
 	check_widht()
+
+
+	var details = document.querySelectorAll('div.transition');
+	Object.keys(details).forEach(function (key){
+		details[key].onclick = function(){return false;}
+	})
 }
 function check_scroll() {
 	ads_ = document.getElementById("ads").style;
-	if(window.scrollY + window.innerHeight + 10 >= document.documentElement.scrollHeight) {
-		ads_.opacity = "";
-		ads_.transform = "translateY(0)";
+	if (window.innerWidth > 850){
+		if(window.scrollY + window.innerHeight + 10 >= document.documentElement.scrollHeight) {
+			ads_.opacity = "";
+			ads_.transform = "translateY(0)";
+		}
+		else{
+			ads_.opacity = 0;
+			ads_.transform = "translateY(60px)";
+		}
 	}
 	else{
-		ads_.opacity = 0;
-		ads_.transform = "translateY(60px)";
+		if(window.scrollY + window.innerHeight + 50 >= document.documentElement.scrollHeight) {
+			ads_.opacity = "";
+			ads_.transform = "translateY(0)";
+		}
+		else{
+			ads_.opacity = 0;
+			ads_.transform = "translateY(60px)";
+		}
 	}
 }
 
