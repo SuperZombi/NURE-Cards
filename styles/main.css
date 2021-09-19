@@ -42,6 +42,7 @@ rav:before{
 	bottom: 0;
 	z-index: 7;
 	width: 500px;
+	display: none;
 }
 .Message{
 	width: 100%;
