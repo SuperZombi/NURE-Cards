@@ -370,7 +370,7 @@ function check_scroll() {
 		}
 	}
 	else{
-		if(window.scrollY + window.innerHeight + 50 >= document.documentElement.scrollHeight) {
+		if(window.scrollY + window.innerHeight + 60 >= document.documentElement.scrollHeight) {
 			ads_.opacity = "";
 			ads_.transform = "translateY(0)";
 		}
