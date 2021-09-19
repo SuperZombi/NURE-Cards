@@ -4,7 +4,12 @@
 	<title>NURE Cards</title>
 	<meta name="viewport" content="width=device-width">
 	<link rel="shortcut icon" href="https://nure.ua/wp-content/themes/nure/images/logo.png" type="image/png">
+	<!-- styles -->
+	<link rel="stylesheet" href="https://superzombi.github.io/Notification_JS/notifications.css">
 	<link rel="stylesheet" href="styles/main.css">
+	<!-- scripts -->
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+	<script src="https://superzombi.github.io/Notification_JS/notifications.js"></script>
 	<script src="scripts/main.js"></script>
 </head>
 <body>
@@ -20,9 +25,33 @@
 	<h1>Главное меню</h1>
 	<hr>
 	<h2>Тут пока ничего нет</h2>
-	<h3>Зачем ты сюда зашёл?</h3>
-	<img src="https://memepedia.ru/wp-content/uploads/2019/07/vyydi-otsyuda-razboynik-3.jpg" width="80%">
+	<h3>¯\_(ツ)_/¯</h3>
+	<hr>
+	<h2>Пользовательские теги:</h2>
+
+	<details>
+		<summary>
+			<div>Курсив</div>
+			<div class="transition">
+				<textarea readonly><cur>Пример текста</cur></textarea>
+				<cur>Пример текста</cur>
+			</div>
+		</summary>
+	</details>
+
+	<details>
+		<summary>
+			<div>Знак равно</div>
+			<div class="transition">
+				Чтобы поставить <b>=</b></br>Используйте следующий тег:
+				<textarea readonly>2 + 2 <rav> 4</textarea>
+			</div>
+		</summary>
+	</details>
+	
 </div>
+
+<div id="notifications"></div>
 
 
 <div id="other">
