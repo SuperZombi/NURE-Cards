@@ -16,12 +16,14 @@ async function server_status(){
 
 		xhr.onload = function() {
 			answer = JSON.parse(xhr.response)
-			server_time = answer.time*1000
-
-			var timeInMs = Date.now();
-			ping = parseInt(timeInMs - server_time)
-			st.innerHTML = `Server: ${ping}ms`
-			st.style.color = "lightgreen"
+			if (answer.online){
+				st.innerHTML = "Server: Online"
+				st.style.color = "lightgreen"
+			}
+			// server_time = answer.time*1000
+			// var timeInMs = Date.now();
+			// ping = parseInt(timeInMs - server_time)
+			// st.innerHTML = `Server: ${ping}ms`
 		}
 		xhr.onerror = function() {
 			st.innerHTML = "Server: Offline"
