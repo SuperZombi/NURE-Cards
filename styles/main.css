@@ -557,3 +557,65 @@ input{
 #ads button:active{
 	border-color: green !important;
 }
+
+
+
+#server{
+	position: relative;
+	height: 5px;
+}
+#server_status{
+	position: absolute;
+	top: 0;
+	right: 10px;
+	color: grey;
+	filter: drop-shadow(1px 1px black);
+}
+#status_animation{
+	display: none;
+}
+#account input{
+	padding: 5px 10px;
+	margin: 10px auto 10px auto;
+	display: block;
+}
+#account input[type=submit]{
+	width: auto;
+	padding: 5px 20px;
+	cursor: pointer;
+	border-radius: 25px;
+	transition: 0.3s;
+	border: 2px solid transparent;
+}
+#account input[type=submit]:hover{
+	padding: 5px 40px;
+	border: 2px solid yellow;
+	background-color: rgba(255, 255, 255, 0.7);
+}
+
+#user{
+	display: none;
+}
+#user svg{
+	height: 35px;
+	border: 2px solid;
+	padding: 3px;
+	border-radius: 50px;
+	margin-bottom: 3px;
+}
+#user_name{
+	font-size: 14pt;
+	font-weight: bold;
+}
+
+
+
+
+.github svg{
+	filter: drop-shadow(0);
+	transition: 0.5s;
+}
+.github:hover svg{
+	fill: white;
+	filter: drop-shadow(0 0 5px black);
+}
