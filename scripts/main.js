@@ -420,7 +420,7 @@ async function show_menu() {
 	other.userSelect = "none";
 	if (window.innerWidth > 850){
 		timout_menu = setTimeout(function(){
-			other.filter = "blur(5px)";
+			other.filter = "blur(4px)";
 		},300)
 	}
 
