@@ -3,6 +3,132 @@ async function share(){
 	await Success("Ссылка скопирована!")
 }
 
+
+server = 'https://nure-cards.herokuapp.com'
+async function server_status(){
+	if (menu_active){
+		let xhr = new XMLHttpRequest();
+		xhr.open("GET", `${server}/status`)
+		xhr.timeout = 5000;
+		xhr.send()
+
+		st = document.getElementById("server_status")
+
+		xhr.onload = function() {
+			answer = JSON.parse(xhr.response)
+
+			var timeInMs = Date.now();
+			ping = parseInt(timeInMs - answer.time*1000)
+			st.innerHTML = `Server: ${ping}ms`
+			st.style.color = "lightgreen"
+		}
+		xhr.onerror = function() {
+			st.innerHTML = "Server: Offline"
+			st.style.color = "red"
+		};
+		setTimeout(function(){ server_status() }, 10000)
+	}
+}
+
+register = false
+function register_(val){
+	register = val
+}
+async function login_background(name, password){
+	let json = JSON.stringify({
+		'name': name,
+		'password': password
+	});
+
+	let xhr = new XMLHttpRequest();
+	xhr.open("POST", `${server}/login`)
+	xhr.timeout = 10000;
+	xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+	xhr.send(json)
+	xhr.onload = function() {
+		answer = JSON.parse(xhr.response)
+		if (!answer.successfully){
+			document.getElementById("status_text").innerHTML = "Ошибка авторизации!</br>"+answer.reason
+		}
+		else{
+			document.getElementById("login_form").style.display = "none";
+			document.getElementById("user_name").innerHTML = name
+			document.getElementById("user").style.display = "block"
+		}
+	}
+	xhr.onerror = function() {
+		document.getElementById("status_text").innerHTML = "Ошибка авторизации!"
+	};
+}
+async function login(x){
+	try{ answer.online }
+	catch{
+		document.getElementById("status_text").innerHTML = "Сервер отключен!"
+		return
+	}
+	if (answer.online){
+		status_anim = document.getElementById("status_animation")
+		status_anim.style.display = "block"
+		if (register){
+			document.getElementById("status_text").innerHTML = "Регистрация..."
+			type_ = "register"
+		}
+		else{
+			document.getElementById("status_text").innerHTML = "Вход..."
+			type_ = "login"
+		}
+		els = x.getElementsByTagName("input");
+		name = els[0].value;
+		password = els[1].value;
+		var passhash = CryptoJS.MD5(password).toString();
+
+		let json = JSON.stringify({
+			'name': name,
+			'password': passhash
+		});
+
+		let xhr = new XMLHttpRequest();
+		xhr.open("POST", `${server}/${type_}`)
+		xhr.timeout = 10000;
+		xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+		xhr.send(json)
+		xhr.onload = function() {
+			answer = JSON.parse(xhr.response)
+			setTimeout(function() {	
+				if (!answer.successfully){
+					document.getElementById("status_text").innerHTML = answer.reason
+					status_anim.style.display = "none"
+				}
+				else{
+					localStorage.setItem('name', name);
+					localStorage.setItem('password', passhash);
+					x.style.display = "none";
+					document.getElementById("status_text").innerHTML = ""
+					status_anim.style.display = "none"
+					document.getElementById("user_name").innerHTML = name
+					document.getElementById("user").style.display = "block"
+				}
+			}, 500)
+		}
+		xhr.onerror = function() {
+			document.getElementById("status_text").innerHTML = "Ошибка!"
+			setTimeout(function(){status_anim.style.display = "none"}, 3000)
+		};
+	}
+}
+async function logout(){
+	localStorage.clear();
+
+	document.getElementById("login_form").style.display = "block";
+	els = document.getElementById("login_form").getElementsByTagName("input");
+	els[0].value = "";
+	els[1].value = "";
+
+	document.getElementById("user").style.display = "none"
+}
+
+
+
 function change(arg) {
 	if (arg == "name"){
 		document.getElementById('name').innerHTML = document.getElementById('input_name').value;
@@ -268,7 +394,9 @@ function go_to_editor(){
 
 
 var timout_menu;
+menu_active = false;
 async function show_menu() {
+	menu_active = true;
 	window.scrollTo(0, 0)
 	but = document.getElementsByClassName("menu_but")[0]
 	but.className = "menu_but menu_active"
@@ -292,8 +420,11 @@ async function show_menu() {
 			other.filter = "blur(5px)";
 		},300)
 	}
+
+	server_status()
 }
 async function close_menu(){
+	menu_active = false;
 	but = document.getElementsByClassName("menu_but")[0]
 	but.className = "menu_but"
 	but.title = "Меню"
@@ -351,6 +482,15 @@ window.onload = async function(){
 	window.addEventListener("hashchange", function(){load_args();});
 	window.addEventListener("resize", function(){ check_widht() });
 	check_widht()
+
+	if (args.hasOwnProperty("share")){}
+	else{
+		let name = localStorage.getItem('name');
+		let password = localStorage.getItem('password');
+		if (name && password){
+			login_background(name, password)
+		}
+	}
 
 
 	var details = document.querySelectorAll('div.transition');
