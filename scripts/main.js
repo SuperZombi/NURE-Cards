@@ -25,7 +25,7 @@ async function server_status(){
 			st.innerHTML = "Server: Offline"
 			st.style.color = "red"
 		};
-		setTimeout(function(){ server_status() }, 10000)
+		setTimeout(function(){ server_status() }, 8000)
 	}
 }
 
