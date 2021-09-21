@@ -7,6 +7,7 @@ async function share(){
 server = 'https://nure-cards.herokuapp.com'
 async function server_status(){
 	if (menu_active){
+		var init = Date.now();
 		let xhr = new XMLHttpRequest();
 		xhr.open("GET", `${server}/status`)
 		xhr.timeout = 5000;
@@ -17,13 +18,11 @@ async function server_status(){
 		xhr.onload = function() {
 			answer = JSON.parse(xhr.response)
 			if (answer.online){
-				st.innerHTML = "Server: Online"
+				var load = Date.now();
+				ping = parseInt(load - init)
+				st.innerHTML = `Server: ${ping}ms`
 				st.style.color = "lightgreen"
-			}
-			// server_time = answer.time*1000
-			// var timeInMs = Date.now();
-			// ping = parseInt(timeInMs - server_time)
-			// st.innerHTML = `Server: ${ping}ms`
+			}		
 		}
 		xhr.onerror = function() {
 			st.innerHTML = "Server: Offline"
