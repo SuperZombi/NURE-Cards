@@ -1,6 +1,4 @@
-server = "http://127.0.0.1:5000"
-// server = 'https://nure-cards.herokuapp.com'
-
+server = 'https://nure-cards.herokuapp.com'
 
 function load_args(){
 	params = window.location.href.split("?").slice(1)
@@ -27,6 +25,7 @@ function load_user_info(user){
 		if (answer.exist){
 			document.getElementById("user_name").innerHTML = user
 			document.getElementById("profile").style.display = "block"
+			document.title = `Профиль ${user} - NURE Cards`
 		}
 		else{
 			document.getElementById("not_found").style.display = "block"
@@ -48,6 +47,7 @@ function load_my_info(){
 	if (name){
 		document.getElementById("user_name").innerHTML = name
 		document.getElementById("profile").style.display = "block"
+		document.title = "Мой профиль - NURE Cards"
 	}
 }
 
