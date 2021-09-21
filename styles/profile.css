@@ -34,9 +34,9 @@ rav:before{
 
 /* Phone screen */
 @media all and (max-width: 600px) {
-	#profile_img img{
-		width: 150px;
-		height: 150px;
+	#profile_img > * {
+		width: 150px !important;
+		height: 150px !important;
 	}
 	#user_name{
 		margin: 10px 0 5px 0 !important;
