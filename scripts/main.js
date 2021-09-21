@@ -22,6 +22,10 @@ async function server_status(){
 			st.innerHTML = `Server: ${ping}ms`
 			st.style.color = "lightgreen"
 		}
+		xhr.ontimeout = function() {
+			st.innerHTML = "Server: Offline"
+			st.style.color = "red"
+		};
 		xhr.onerror = function() {
 			st.innerHTML = "Server: Offline"
 			st.style.color = "red"
@@ -56,6 +60,9 @@ async function login_background(name, password){
 			document.getElementById("user").style.display = "block"
 		}
 	}
+	xhr.ontimeout = function() {
+		document.getElementById("status_text").innerHTML = "Ошибка авторизации!"
+	};
 	xhr.onerror = function() {
 		document.getElementById("status_text").innerHTML = "Ошибка авторизации!"
 	};
@@ -80,6 +87,11 @@ async function login(x){
 		els = x.getElementsByTagName("input");
 		name = els[0].value;
 		password = els[1].value;
+		if (name.includes('"')){
+			document.getElementById("status_text").innerHTML = "Запрещённый символ в нике!"
+			status_anim.style.display = "none"
+			return
+		}
 		var passhash = CryptoJS.MD5(password).toString();
 
 		let json = JSON.stringify({
@@ -110,9 +122,13 @@ async function login(x){
 				}
 			}, 500)
 		}
+		xhr.ontimeout = function() {
+			document.getElementById("status_text").innerHTML = "Ошибка!"
+			setTimeout(function(){status_anim.style.display = "none"}, 2500)
+		};
 		xhr.onerror = function() {
 			document.getElementById("status_text").innerHTML = "Ошибка!"
-			setTimeout(function(){status_anim.style.display = "none"}, 3000)
+			setTimeout(function(){status_anim.style.display = "none"}, 2500)
 		};
 	}
 }
