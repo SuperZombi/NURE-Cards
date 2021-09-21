@@ -7,22 +7,19 @@ async function share(){
 server = 'https://nure-cards.herokuapp.com'
 async function server_status(){
 	if (menu_active){
-		var init = Date.now();
 		let xhr = new XMLHttpRequest();
 		xhr.open("GET", `${server}/status`)
-		xhr.timeout = 5000;
+		xhr.timeout = 2000;
+		var init = Date.now();
 		xhr.send()
 
 		st = document.getElementById("server_status")
 
 		xhr.onload = function() {
-			answer = JSON.parse(xhr.response)
-			if (answer.online){
-				var load = Date.now();
-				ping = parseInt(load - init)
-				st.innerHTML = `Server: ${ping}ms`
-				st.style.color = "lightgreen"
-			}		
+			var load = Date.now();
+			ping = parseInt(load - init)
+			st.innerHTML = `Server: ${ping}ms`
+			st.style.color = "lightgreen"		
 		}
 		xhr.onerror = function() {
 			st.innerHTML = "Server: Offline"
@@ -44,7 +41,7 @@ async function login_background(name, password){
 
 	let xhr = new XMLHttpRequest();
 	xhr.open("POST", `${server}/login`)
-	xhr.timeout = 10000;
+	xhr.timeout = 5000;
 	xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
 	xhr.send(json)
 	xhr.onload = function() {
@@ -91,7 +88,7 @@ async function login(x){
 
 		let xhr = new XMLHttpRequest();
 		xhr.open("POST", `${server}/${type_}`)
-		xhr.timeout = 10000;
+		xhr.timeout = 5000;
 		xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
 		xhr.send(json)
 		xhr.onload = function() {
