@@ -17,9 +17,10 @@ async function server_status(){
 
 		xhr.onload = function() {
 			var load = Date.now();
+			answer_status = JSON.parse(xhr.response)
 			ping = parseInt(load - init)
 			st.innerHTML = `Server: ${ping}ms`
-			st.style.color = "lightgreen"		
+			st.style.color = "lightgreen"
 		}
 		xhr.onerror = function() {
 			st.innerHTML = "Server: Offline"
@@ -60,12 +61,12 @@ async function login_background(name, password){
 	};
 }
 async function login(x){
-	try{ answer.online }
+	try{ answer_status.online }
 	catch{
 		document.getElementById("status_text").innerHTML = "Сервер отключен!"
 		return
 	}
-	if (answer.online){
+	if (answer_status.online){
 		status_anim = document.getElementById("status_animation")
 		status_anim.style.display = "block"
 		if (register){
