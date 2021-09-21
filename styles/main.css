@@ -596,18 +596,40 @@ input{
 #user{
 	display: none;
 }
-#user svg{
-	height: 35px;
-	border: 2px solid;
-	padding: 3px;
+#user_image{
+	height: 45px;
+	width: 45px;
+	border: 3px solid black;
 	border-radius: 50px;
-	margin-bottom: 3px;
+	margin-bottom: 4px;
+	position: relative;
+	display: inline-block;
+	overflow: hidden;
+	transition: 0.35s;
+}
+#user_image > * {
+	display: block;
+	height: 100%;
+	width: 100%;
+	position: relative;
+	top: 50%;
+	left: 50%;
+	transform: translateY(-50%) translateX(-50%);
+}
+#user_image svg{
+	height: 80%;
+	width: 80%;
+}
+#user_image:hover{
+	border-color: white;
+	height: 60px;
+	width: 60px;
+	filter: drop-shadow(0 0 10px white)
 }
 #user_name{
 	font-size: 14pt;
 	font-weight: bold;
 }
-
 
 
 
