@@ -1,4 +1,4 @@
-server = 'https://nure-cards.herokuapp.com'
+server = "http://37.57.132.178"
 
 function load_args(){
 	params = window.location.href.split("?").slice(1)
