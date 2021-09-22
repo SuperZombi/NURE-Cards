@@ -8,7 +8,7 @@ server = "http://37.57.132.178"
 async function server_status(){
 	if (menu_active){
 		let xhr = new XMLHttpRequest();
-		xhr.open("GET", `${server}/status`, true)
+		xhr.open("GET", `${server}/status`)
 		xhr.timeout = 2000;
 		var init = Date.now();
 		xhr.send()
