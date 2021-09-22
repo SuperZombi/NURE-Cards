@@ -5,6 +5,11 @@ async function share(){
 
 
 server = 'https://nure-cards.herokuapp.com'
+
+function error_xhr() {
+	st.innerHTML = "Server: Offline"
+	st.style.color = "red"	
+}
 async function server_status(){
 	if (menu_active){
 		let xhr = new XMLHttpRequest();
@@ -16,19 +21,22 @@ async function server_status(){
 		st = document.getElementById("server_status")
 
 		xhr.onload = function() {
-			var load = Date.now();
-			answer_status = JSON.parse(xhr.response)
-			ping = parseInt(load - init)
-			st.innerHTML = `Server: ${ping}ms`
-			st.style.color = "lightgreen"
+			if (xhr.status != 200){
+				error_xhr()
+			}
+			else{
+				var load = Date.now();
+				answer_status = JSON.parse(xhr.response)
+				ping = parseInt(load - init)
+				st.innerHTML = `Server: ${ping}ms`
+				st.style.color = "lightgreen"
+			}
 		}
 		xhr.ontimeout = function() {
-			st.innerHTML = "Server: Offline"
-			st.style.color = "red"
+			error_xhr()
 		};
 		xhr.onerror = function() {
-			st.innerHTML = "Server: Offline"
-			st.style.color = "red"
+			error_xhr()
 		};
 		setTimeout(function(){ server_status() }, 8000)
 	}
@@ -50,14 +58,20 @@ async function login_background(name, password){
 	xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
 	xhr.send(json)
 	xhr.onload = function() {
-		answer = JSON.parse(xhr.response)
-		if (!answer.successfully){
-			document.getElementById("status_text").innerHTML = "Ошибка авторизации!</br>"+answer.reason
+		if (xhr.status != 200){
+			error_xhr()
+			document.getElementById("status_text").innerHTML = "Ошибка авторизации!"
 		}
 		else{
-			document.getElementById("login_form").style.display = "none";
-			document.getElementById("user_name").innerHTML = name
-			document.getElementById("user").style.display = "block"
+			answer = JSON.parse(xhr.response)
+			if (!answer.successfully){
+				document.getElementById("status_text").innerHTML = "Ошибка авторизации!</br>"+answer.reason
+			}
+			else{
+				document.getElementById("login_form").style.display = "none";
+				document.getElementById("user_name").innerHTML = name
+				document.getElementById("user").style.display = "block"
+			}			
 		}
 	}
 	xhr.ontimeout = function() {
@@ -105,22 +119,27 @@ async function login(x){
 		xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
 		xhr.send(json)
 		xhr.onload = function() {
-			answer = JSON.parse(xhr.response)
-			setTimeout(function() {	
-				if (!answer.successfully){
-					document.getElementById("status_text").innerHTML = answer.reason
-					status_anim.style.display = "none"
-				}
-				else{
-					localStorage.setItem('name', name);
-					localStorage.setItem('password', passhash);
-					x.style.display = "none";
-					document.getElementById("status_text").innerHTML = ""
-					status_anim.style.display = "none"
-					document.getElementById("user_name").innerHTML = name
-					document.getElementById("user").style.display = "block"
-				}
-			}, 500)
+			if (xhr.status != 200){
+				error_xhr()
+			}
+			else{
+				answer = JSON.parse(xhr.response)
+				setTimeout(function() {	
+					if (!answer.successfully){
+						document.getElementById("status_text").innerHTML = answer.reason
+						status_anim.style.display = "none"
+					}
+					else{
+						localStorage.setItem('name', name);
+						localStorage.setItem('password', passhash);
+						x.style.display = "none";
+						document.getElementById("status_text").innerHTML = ""
+						status_anim.style.display = "none"
+						document.getElementById("user_name").innerHTML = name
+						document.getElementById("user").style.display = "block"
+					}
+				}, 500)				
+			}
 		}
 		xhr.ontimeout = function() {
 			document.getElementById("status_text").innerHTML = "Ошибка!"
