@@ -4,7 +4,7 @@ async function share(){
 }
 
 
-server = "http://37.57.132.178"
+server = 'https://nure-cards.herokuapp.com'
 async function server_status(){
 	if (menu_active){
 		let xhr = new XMLHttpRequest();
