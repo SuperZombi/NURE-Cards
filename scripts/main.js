@@ -6,10 +6,6 @@ async function share(){
 
 server = 'https://nure-cards.herokuapp.com'
 
-function error_xhr() {
-	st.innerHTML = "Server: Offline"
-	st.style.color = "red"	
-}
 async function server_status(){
 	if (menu_active){
 		let xhr = new XMLHttpRequest();
@@ -22,7 +18,8 @@ async function server_status(){
 
 		xhr.onload = function() {
 			if (xhr.status != 200){
-				error_xhr()
+				st.innerHTML = "Server: Offline"
+				st.style.color = "red"
 			}
 			else{
 				var load = Date.now();
@@ -33,10 +30,12 @@ async function server_status(){
 			}
 		}
 		xhr.ontimeout = function() {
-			error_xhr()
+			st.innerHTML = "Server: Offline"
+			st.style.color = "red"
 		};
 		xhr.onerror = function() {
-			error_xhr()
+			st.innerHTML = "Server: Offline"
+			st.style.color = "red"
 		};
 		setTimeout(function(){ server_status() }, 8000)
 	}
@@ -59,7 +58,6 @@ async function login_background(name, password){
 	xhr.send(json)
 	xhr.onload = function() {
 		if (xhr.status != 200){
-			error_xhr()
 			document.getElementById("status_text").innerHTML = "Ошибка авторизации!"
 		}
 		else{
@@ -120,7 +118,8 @@ async function login(x){
 		xhr.send(json)
 		xhr.onload = function() {
 			if (xhr.status != 200){
-				error_xhr()
+				document.getElementById("status_text").innerHTML = "Ошибка!"
+				setTimeout(function(){status_anim.style.display = "none"}, 2500)
 			}
 			else{
 				answer = JSON.parse(xhr.response)
