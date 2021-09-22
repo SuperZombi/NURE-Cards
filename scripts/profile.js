@@ -21,14 +21,21 @@ function load_user_info(user){
 	xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
 	xhr.send(JSON.stringify({'name': user}))
 	xhr.onload = function() {
-		answer = JSON.parse(xhr.response)
-		if (answer.exist){
-			document.getElementById("user_name").innerHTML = user
-			document.getElementById("profile").style.display = "block"
-			document.title = `Профиль ${user} - NURE Cards`
+		if (xhr.status != 200){
+			document.getElementById("not_found").getElementsByTagName("p")[0].innerHTML = "Ошибка сервера!"
+			document.getElementById("not_found").getElementsByTagName("h1")[0].style.display = "none"
+			document.getElementById("not_found").style.display = "block"	
 		}
 		else{
-			document.getElementById("not_found").style.display = "block"
+			answer = JSON.parse(xhr.response)
+			if (answer.exist){
+				document.getElementById("user_name").innerHTML = user
+				document.getElementById("profile").style.display = "block"
+				document.title = `Профиль ${user} - NURE Cards`
+			}
+			else{
+				document.getElementById("not_found").style.display = "block"
+			}			
 		}
 	}
 	xhr.ontimeout = function() {
