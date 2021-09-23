@@ -349,9 +349,11 @@ function load_args(){
 				if (answer.successfully){
 					if (args.hasOwnProperty("share")){
 						window.location.href = "index.html#" + answer.card_body + "?share"
+						window.location.reload()
 					}
 					else{
 						window.location.href = "index.html#" + answer.card_body
+						window.location.reload()
 					}
 				}
 				else{
