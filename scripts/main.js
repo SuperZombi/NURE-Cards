@@ -172,6 +172,7 @@ async function save_card_root(){
 		'name': name,
 		'password': password,
 		'card_name': document.getElementById("input_name").value,
+		'card_image': document.getElementById("input_image").value,
 		'card_body': window.location.href.split(window.location.href.split("?")[0])[1]
 	});
 
@@ -206,35 +207,40 @@ async function save_card(){
 	let password = localStorage.getItem('password');
 	if (name && password){
 		if (document.getElementById("input_name").value){
-			let json1 = JSON.stringify({
-				'name': name,
-				'card_name': document.getElementById("input_name").value
-			});
-			let xhr1 = new XMLHttpRequest();
-			xhr1.open("POST", `${server}/card_exist`)
-			xhr1.timeout = 5000;
-			xhr1.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-			xhr1.send(json1)
-			xhr1.onload = async function() {
-				if (xhr1.status != 200){
-					await Error("Ошибка сервера!")
-				}
-				else{
-					answer1 = JSON.parse(xhr1.response)
-					if (answer1.exist){
-						await Warning("Такая карточка уже существует!</br>Заменить?", false, [['Да', save_card_root], 'Нет'])
+			if (document.getElementById("input_image").value){
+				let json1 = JSON.stringify({
+					'name': name,
+					'card_name': document.getElementById("input_name").value
+				});
+				let xhr1 = new XMLHttpRequest();
+				xhr1.open("POST", `${server}/card_exist`)
+				xhr1.timeout = 5000;
+				xhr1.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+				xhr1.send(json1)
+				xhr1.onload = async function() {
+					if (xhr1.status != 200){
+						await Error("Ошибка сервера!")
 					}
 					else{
-						save_card_root()
+						answer1 = JSON.parse(xhr1.response)
+						if (answer1.exist){
+							await Warning("Такая карточка уже существует!</br>Заменить?", false, [['Да', save_card_root], 'Нет'])
+						}
+						else{
+							save_card_root()
+						}
 					}
 				}
+				xhr1.ontimeout = async function() {
+					await Error("Ошибка сервера!")
+				};
+				xhr1.onerror = async function() {
+					await Error("Ошибка сервера!")
+				};
 			}
-			xhr1.ontimeout = async function() {
-				await Error("Ошибка сервера!")
-			};
-			xhr1.onerror = async function() {
-				await Error("Ошибка сервера!")
-			};	
+			else{
+				await Error("У карточки нет картинки!")
+			}
 		}
 		else{
 			await Error("У карточки нет названия!")
