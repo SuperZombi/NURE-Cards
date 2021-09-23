@@ -329,6 +329,46 @@ function load_args(){
 		temp = params[i].split("=")
 		args[decodeURIComponent(temp[0])] = decodeURIComponent(temp[1])
 	}
+	if (args.hasOwnProperty("user") && args.hasOwnProperty("card")){
+		let json = JSON.stringify({
+			'user': args['user'],
+			'card': args['card']
+		});
+		let xhr = new XMLHttpRequest();
+		xhr.open("POST", `${server}/get_card`)
+		xhr.timeout = 5000;
+		xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+		xhr.send(json)
+		xhr.onload = async function() {
+			if (xhr.status != 200){
+				await Error("Ошибка сервера!")
+				if (!args.hasOwnProperty("share")){window.location.hash = ""}
+			}
+			else{
+				answer = JSON.parse(xhr.response)
+				if (answer.successfully){
+					if (args.hasOwnProperty("share")){
+						window.location.href = "index.html#" + answer.card_body + "?share"
+					}
+					else{
+						window.location.href = "index.html#" + answer.card_body
+					}
+				}
+				else{
+					await Error("Карточка не найдена!", false)
+					if (!args.hasOwnProperty("share")){window.location.hash = ""}	
+				}
+			}
+		}
+		xhr.ontimeout = async function() {
+			await Error("Ошибка сервера!")
+			if (!args.hasOwnProperty("share")){window.location.hash = ""}	
+		};
+		xhr.onerror = async function() {
+			await Error("Ошибка сервера!")
+			if (!args.hasOwnProperty("share")){window.location.hash = ""}	
+		};
+	}
 	if (args.hasOwnProperty("name")){
 		document.getElementById('name').innerHTML = args['name']
 		document.getElementById('input_name').value = args['name']
@@ -597,7 +637,6 @@ window.onload = async function(){
 	else{
 		document.getElementById("constructor").style.display = "block";
 		document.getElementById("header").style.display = "block";
-		document.getElementById("notifications").style.display = "block";
 	}
 	document.getElementById("card").style.opacity = "1";
 	document.getElementById("card_front").style.transform = "rotateY(0deg)"
