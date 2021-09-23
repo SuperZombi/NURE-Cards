@@ -69,6 +69,7 @@ async function login_background(name, password){
 				document.getElementById("login_form").style.display = "none";
 				document.getElementById("user_name").innerHTML = name
 				document.getElementById("user").style.display = "block"
+				document.getElementById("save_but").style.display = "inline-block"
 			}			
 		}
 	}
@@ -136,6 +137,7 @@ async function login(x){
 						status_anim.style.display = "none"
 						document.getElementById("user_name").innerHTML = name
 						document.getElementById("user").style.display = "block"
+						document.getElementById("save_but").style.display = "inline-block"
 					}
 				}, 500)				
 			}
@@ -159,6 +161,54 @@ async function logout(){
 	els[1].value = "";
 
 	document.getElementById("user").style.display = "none"
+	document.getElementById("save_but").style.display = "none"
+}
+
+async function save_card(){
+	let name = localStorage.getItem('name');
+	let password = localStorage.getItem('password');
+	if (name && password){
+		if (document.getElementById("input_name").value){
+			let json = JSON.stringify({
+				'name': name,
+				'password': password,
+				'card_name': document.getElementById("input_name").value,
+				'card_body': window.location.href.split(window.location.href.split("?")[0])[1]
+			});
+
+			let xhr = new XMLHttpRequest();
+			xhr.open("POST", `${server}/save_card`)
+			xhr.timeout = 5000;
+			xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+			xhr.send(json)
+			xhr.onload = async function() {
+				if (xhr.status != 200){
+					await Error("Ошибка сервера!")
+				}
+				else{
+					answer = JSON.parse(xhr.response)
+					if (!answer.successfully){
+						await Error("Ошибка!")
+					}
+					else{
+						await Success("Сохранено!")
+					}
+				}
+			}
+			xhr.ontimeout = async function() {
+				await Error("Ошибка сервера!")
+			};
+			xhr.onerror = async function() {
+				await Error("Ошибка сервера!")
+			};
+		}
+		else{
+			await Error("У карточки нет названия!")
+		}
+	}
+	else{
+		await Error("Войдите в аккаунт!")
+	}
 }
 
 
@@ -229,7 +279,7 @@ function update_href(){
 	}
 	timout_id = setTimeout(function(){
 		location.hash = new_link
-	}, 1000);
+	}, 500);
 }
 
 function load_args(){
