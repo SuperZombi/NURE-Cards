@@ -72,6 +72,9 @@ body{
 #header img{
 	height: 40px;
 }
+#save_but{
+	display: none;
+}
 .menu_but:before,.menu_but:after,.menu_but div {
 	background: #fff;
 	content: "";
