@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap');
 
 /* User Tags */
 cur{
@@ -41,6 +42,19 @@ rav:before{
 	#user_name{
 		margin: 10px 0 5px 0 !important;
 		font-size: 22pt !important;
+	}
+	.card{
+		width: 220px !important;
+		height: 300px !important;
+	}
+	#card_previewer_name{
+		font-size: 20pt !important;
+	}
+	#notifications{
+		width: 98%;
+		left: 2px;
+		margin-left: auto;
+		margin-right: auto;
 	}
 }
 
@@ -128,4 +142,149 @@ body{
 	font-size: 30pt;
 	font-family: 'Ubuntu';
 	text-align: center;
+}
+
+
+
+#user_cards{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    flex-direction: row;
+}
+.card{
+	display: inline-block;
+	background: linear-gradient(50deg, rgba(108,91,125,1) 0%, rgba(0,171,171,1) 100%);
+	width: 200px;
+	height: 272px;
+	border-radius: 20px;
+	font-family: 'Balsamiq Sans';
+	overflow: hidden;
+	cursor: pointer;
+	transition: 0.3s;
+	margin: 10px;
+}
+.card:hover{
+	border-radius: 30px;
+}
+.card:hover .img_zone{
+	height: 152px;
+	width: 152px;
+	border-radius: 40%;
+}
+.card:hover .img_zone img{
+	width: 152px;
+}
+.img_zone{
+	margin: 15px auto;
+	height: 180px;
+	width: 180px;
+	overflow: hidden;
+	border-radius: 50% !important;
+	transition: 0.3s;
+}
+.img_zone img{
+	width: 180px;
+	transform: scale(1.1);
+	transition: 0.3s;
+}
+.card_name{
+	padding: 0 5px;
+	font-size: 18pt;
+	text-align: center;
+	color: #CC92FF;
+	text-shadow: 2px 2px 3px black;
+}
+
+#card_previewer{
+	display: none;
+	height: 80px;
+	justify-content: center;
+    align-items: center;
+	transform: translateY(100%);
+	width: 100%;
+	left: 0;
+	background-color: #09161C;
+	position: fixed;
+	z-index: 4;
+	bottom: 0;
+	transition: 0.4s;
+}
+#card_previewer > * {
+	height: 50px;
+	display: inline-block;
+	margin: 15px;
+	filter: drop-shadow(0 0 1px white);
+	cursor: pointer;
+	transition: 0.3s;
+}
+#card_previewer > *:hover {
+	filter: drop-shadow(0 0 3px white);
+}
+#card_previewer > svg{
+	height: 40px;
+	fill: red;
+}
+#card_previewer> svg:hover{
+	filter: drop-shadow(0 0 10px red);
+}
+
+#card_previewer_name{
+	font-family: 'Balsamiq Sans';
+	max-height: 100px;
+	font-size: 30pt;
+	color: white;
+	display: none;
+	text-align: center;
+	transform: translateY(350%);
+	width: 100%;
+	left: 0;
+	background-color: #09161C;
+	position: fixed;
+	z-index: 3;
+	bottom: 80px;
+	transition: 0.75s;
+	filter: drop-shadow(0 -1px 5px white);
+}
+#card_previewer_name div{
+	margin: 0 5px;
+}
+
+.loading{
+	background:#B0B0B0;
+	border-radius: 12px;
+	animation: anim 1.5s infinite;
+	color: transparent;
+	cursor: auto;
+}
+.loading *{
+	opacity: 0;
+}
+@keyframes anim {
+	from{
+		background:#B0B0B0;
+	}
+	50%{
+		background:lightgray;
+	}
+	to{
+		background:#B0B0B0;
+	}
+}
+
+#notifications{
+	position: fixed;
+	right: 2px;
+	bottom: 0;
+	z-index: 7;
+	width: 500px;
+}
+.Message{
+	width: 100%;
+	filter: drop-shadow(-2px -2px 6px black);
+}
+
+#empty{
+	font-family: 'Balsamiq Sans';
+	color: white;
 }
