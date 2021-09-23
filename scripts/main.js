@@ -164,43 +164,77 @@ async function logout(){
 	document.getElementById("save_but").style.display = "none"
 }
 
+
+async function save_card_root(){
+	let name = localStorage.getItem('name');
+	let password = localStorage.getItem('password');
+	let json = JSON.stringify({
+		'name': name,
+		'password': password,
+		'card_name': document.getElementById("input_name").value,
+		'card_body': window.location.href.split(window.location.href.split("?")[0])[1]
+	});
+
+	let xhr = new XMLHttpRequest();
+	xhr.open("POST", `${server}/save_card`)
+	xhr.timeout = 5000;
+	xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+	xhr.send(json)
+	xhr.onload = async function() {
+		if (xhr.status != 200){
+			await Error("Ошибка сервера!")
+		}
+		else{
+			answer = JSON.parse(xhr.response)
+			if (!answer.successfully){
+				await Error("Ошибка!")
+			}
+			else{
+				await Success("Сохранено!")
+			}
+		}
+	}
+	xhr.ontimeout = async function() {
+		await Error("Ошибка сервера!")
+	};
+	xhr.onerror = async function() {
+		await Error("Ошибка сервера!")
+	};
+}
 async function save_card(){
 	let name = localStorage.getItem('name');
 	let password = localStorage.getItem('password');
 	if (name && password){
 		if (document.getElementById("input_name").value){
-			let json = JSON.stringify({
+			let json1 = JSON.stringify({
 				'name': name,
-				'password': password,
-				'card_name': document.getElementById("input_name").value,
-				'card_body': window.location.href.split(window.location.href.split("?")[0])[1]
+				'card_name': document.getElementById("input_name").value
 			});
-
-			let xhr = new XMLHttpRequest();
-			xhr.open("POST", `${server}/save_card`)
-			xhr.timeout = 5000;
-			xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-			xhr.send(json)
-			xhr.onload = async function() {
-				if (xhr.status != 200){
+			let xhr1 = new XMLHttpRequest();
+			xhr1.open("POST", `${server}/card_exist`)
+			xhr1.timeout = 5000;
+			xhr1.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+			xhr1.send(json1)
+			xhr1.onload = async function() {
+				if (xhr1.status != 200){
 					await Error("Ошибка сервера!")
 				}
 				else{
-					answer = JSON.parse(xhr.response)
-					if (!answer.successfully){
-						await Error("Ошибка!")
+					answer1 = JSON.parse(xhr1.response)
+					if (answer1.exist){
+						await Warning("Такая карточка уже существует!</br>Заменить?", false, [['Да', save_card_root], 'Нет'])
 					}
 					else{
-						await Success("Сохранено!")
+						save_card_root()
 					}
 				}
 			}
-			xhr.ontimeout = async function() {
+			xhr1.ontimeout = async function() {
 				await Error("Ошибка сервера!")
 			};
-			xhr.onerror = async function() {
+			xhr1.onerror = async function() {
 				await Error("Ошибка сервера!")
-			};
+			};	
 		}
 		else{
 			await Error("У карточки нет названия!")
