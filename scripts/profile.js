@@ -174,14 +174,14 @@ async function open_in_editor(){
 	user = document.getElementById("user_name").innerHTML
 	val = window.location.href
 	temp = val.substring(val.lastIndexOf('/')+1,val.length)
-	href = window.location.href.split(temp)[0] + "index.html" + "?user=" + user + "?card=" + current_show
+	href = window.location.href.split(temp)[0] + "index.html#" + "?user=" + user + "?card=" + current_show
 	window.location.href = href
 }
 async function share(){
 	user = document.getElementById("user_name").innerHTML
 	val = window.location.href
 	temp = val.substring(val.lastIndexOf('/')+1,val.length)
-	href = window.location.href.split(temp)[0] + "index.html" + "?user=" + user + "?card=" + current_show
+	href = window.location.href.split(temp)[0] + "index.html#" + "?user=" + user + "?card=" + current_show
 	navigator.clipboard.writeText(href + "?share")
 	await Success("Ссылка скопирована!")
 }
