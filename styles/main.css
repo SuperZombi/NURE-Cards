@@ -42,7 +42,6 @@ rav:before{
 	bottom: 0;
 	z-index: 7;
 	width: 500px;
-	display: none;
 }
 .Message{
 	width: 100%;
@@ -534,6 +533,7 @@ input{
 	transition: 0.6s;
 	transform: translateY(60px);
 	z-index: 6;
+	left: 0;
 }
 #ads:hover{
 	opacity: 1;
