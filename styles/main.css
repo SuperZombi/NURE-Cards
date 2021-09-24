@@ -265,11 +265,12 @@ details[open] .transition{
 	margin-right: auto;
 }
 .img_zone img{
-	height: 400px;
+	width: 110%;
 	/* vertically center */
 	position: relative;
 	top: 50%;
-	transform: translateY(-50%);
+	margin-left: 50%;
+	transform: translateY(-50%) translateX(-50%);
 }
 #stars{
 	text-align: center;
