@@ -1,6 +1,7 @@
 server = 'https://nure-cards.herokuapp.com'
 
 function _404(){
+	document.getElementById("not_found").style.display = "block"
 	document.onmousemove = function(e){
 		var targetNode = document.getElementById("404");
 		let centerX = targetNode.offsetLeft + targetNode.offsetWidth / 2;
@@ -16,6 +17,12 @@ function _404(){
 			
 		document.getElementById("404").style.filter = `drop-shadow(${x1}px ${y1}px 20px grey)`;
 	}	
+}
+function server_error(){
+	document.getElementById("not_found").getElementsByTagName("p")[0].innerHTML = "Ошибка сервера!"
+	document.getElementById("not_found").getElementsByTagName("h1")[0].style.display = "none"
+	document.getElementById("not_found").getElementsByTagName("img")[0].style.display = "inline-block"
+	document.getElementById("not_found").style.display = "block"
 }
 function ckeck_none(){
 	if (document.getElementById("user_cards").innerHTML == ""){
@@ -58,22 +65,16 @@ function load_cards(user) {
 		}
 		else{
 			document.getElementById("user_cards").innerHTML = ""
-			document.getElementById("not_found").getElementsByTagName("p")[0].innerHTML = "Ошибка сервера!"
-			document.getElementById("not_found").getElementsByTagName("h1")[0].style.display = "none"
-			document.getElementById("not_found").style.display = "block"
+			server_error()
 		}
 	}
 	xhr.ontimeout = function() {
 		document.getElementById("user_cards").innerHTML = ""
-		document.getElementById("not_found").getElementsByTagName("p")[0].innerHTML = "Ошибка сервера!"
-		document.getElementById("not_found").getElementsByTagName("h1")[0].style.display = "none"
-		document.getElementById("not_found").style.display = "block"
+		server_error()
 	};
 	xhr.onerror = function() {
 		document.getElementById("user_cards").innerHTML = ""
-		document.getElementById("not_found").getElementsByTagName("p")[0].innerHTML = "Ошибка сервера!"
-		document.getElementById("not_found").getElementsByTagName("h1")[0].style.display = "none"
-		document.getElementById("not_found").style.display = "block"		
+		server_error()
 	};
 }
 function load_args(){
@@ -93,14 +94,12 @@ function load_args(){
 function load_user_info(user){
 	let xhr = new XMLHttpRequest();
 	xhr.open("POST", `${server}/user_exists`)
-	xhr.timeout = 5000;
+	xhr.timeout = 3000;
 	xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
 	xhr.send(JSON.stringify({'name': user}))
 	xhr.onload = function() {
 		if (xhr.status != 200){
-			document.getElementById("not_found").getElementsByTagName("p")[0].innerHTML = "Ошибка сервера!"
-			document.getElementById("not_found").getElementsByTagName("h1")[0].style.display = "none"
-			document.getElementById("not_found").style.display = "block"
+			server_error()
 		}
 		else{
 			answer = JSON.parse(xhr.response)
@@ -111,20 +110,15 @@ function load_user_info(user){
 				load_cards(user)
 			}
 			else{
-				document.getElementById("not_found").style.display = "block"
 				_404()
 			}			
 		}
 	}
 	xhr.ontimeout = function() {
-		document.getElementById("not_found").getElementsByTagName("p")[0].innerHTML = "Ошибка сервера!"
-		document.getElementById("not_found").getElementsByTagName("h1")[0].style.display = "none"
-		document.getElementById("not_found").style.display = "block"
+		server_error()
 	};
 	xhr.onerror = function() {
-		document.getElementById("not_found").getElementsByTagName("p")[0].innerHTML = "Ошибка сервера!"
-		document.getElementById("not_found").getElementsByTagName("h1")[0].style.display = "none"
-		document.getElementById("not_found").style.display = "block"
+		server_error()
 	};
 }
 function load_my_info(){
@@ -134,6 +128,10 @@ function load_my_info(){
 		document.getElementById("profile").style.display = "block"
 		document.title = "Мой профиль - NURE Cards"
 		load_cards(name)
+	}
+	else{
+		server_error()
+		document.getElementById("not_found").getElementsByTagName("p")[0].innerHTML = "Ошибка!"
 	}
 }
 
