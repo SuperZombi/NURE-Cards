@@ -181,7 +181,7 @@ async function share(){
 	temp = val.substring(val.lastIndexOf('/')+1,val.length)
 	href = window.location.href.split(temp)[0] + "index.html#" + "?user=" + user + "?card=" + current_show
 	navigator.clipboard.writeText(href + "?share")
-	await Success("Ссылка скопирована!")
+	await Success("Ссылка скопирована!", 3000)
 }
 async function confirm_delete(){
 	await Warning("Удалить?", false, [['Да', delete_], 'Нет'])
@@ -204,7 +204,7 @@ async function delete_(){
 				if(JSON.parse(xhr.response)['successfully']){
 					current_show_obj.remove()
 					hide()
-					await Success("Удалено!")
+					await Success("Удалено!", 3000)
 					ckeck_none()
 				}
 				else{
