@@ -265,7 +265,7 @@ function change(arg) {
 	if (arg == "stars"){
 		document.getElementById('stars').innerHTML = ""
 		for (i=0; i < document.getElementById('input_stars').value; i++) {
-			document.getElementById('stars').innerHTML += '<img src="https://rerollcdn.com/SDSGC/ui/skill_star.png">'
+			document.getElementById('stars').innerHTML += '<img src="images/skill_star.png">'
 		}
 		args["stars"] = document.getElementById('input_stars').value;
 	}
@@ -383,7 +383,7 @@ function load_args(){
 		document.getElementById('input_stars').value = args['stars']
 		document.getElementById('stars').innerHTML = ""
 		for (i=0; i < args['stars']; i++) {
-			document.getElementById('stars').innerHTML += '<img src="https://rerollcdn.com/SDSGC/ui/skill_star.png">'
+			document.getElementById('stars').innerHTML += '<img src="images/skill_star.png">'
 		}
 	}
 	if (args.hasOwnProperty("characteristics")){
