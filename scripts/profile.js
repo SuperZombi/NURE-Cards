@@ -19,6 +19,7 @@ function _404(){
 	}	
 }
 function server_error(){
+	document.getElementById("profile").style.display = "none"
 	document.getElementById("not_found").getElementsByTagName("p")[0].innerHTML = "Ошибка сервера!"
 	document.getElementById("not_found").getElementsByTagName("h1")[0].style.display = "none"
 	document.getElementById("not_found").getElementsByTagName("img")[0].style.display = "inline-block"
