@@ -71,6 +71,9 @@ body{
 #header img{
 	height: 40px;
 }
+#header svg{
+	height: 40px;
+}
 #save_but{
 	display: none;
 }
