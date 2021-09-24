@@ -221,6 +221,9 @@ body{
 #card_previewer > *:hover {
 	filter: drop-shadow(0 0 3px white);
 }
+.delete > svg{
+	height: 48px;
+}
 #card_previewer > svg{
 	height: 40px;
 	fill: red;
