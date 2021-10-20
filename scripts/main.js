@@ -328,7 +328,7 @@ function update_href(){
 	}
 	timout_id = setTimeout(function(){
 		location.hash = new_link
-	}, 500);
+	}, 450);
 }
 
 function load_args(){
