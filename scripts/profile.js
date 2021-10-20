@@ -176,12 +176,20 @@ async function open_in_editor(){
 	href = window.location.href.split(temp)[0] + "index.html#" + "?user=" + user + "?card=" + current_show
 	window.location.href = href
 }
+function copyToClipboard(text) {
+	const elem = document.createElement('textarea');
+	elem.value = text;
+	document.body.appendChild(elem);
+	elem.select();
+	document.execCommand('copy');
+	document.body.removeChild(elem);
+}
 async function share(){
 	user = document.getElementById("user_name").innerHTML
 	val = window.location.href
 	temp = val.substring(val.lastIndexOf('/')+1,val.length)
 	href = window.location.href.split(temp)[0] + "index.html#" + "?user=" + user + "?card=" + current_show
-	navigator.clipboard.writeText(href + "?share")
+	copyToClipboard(decodeURI(href + "?share"))
 	await Success("Ссылка скопирована!", 3000)
 }
 async function confirm_delete(){
