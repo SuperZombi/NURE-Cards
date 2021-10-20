@@ -1,5 +1,14 @@
+function copyToClipboard(text) {
+	const elem = document.createElement('textarea');
+	elem.value = text;
+	document.body.appendChild(elem);
+	elem.select();
+	document.execCommand('copy');
+	document.body.removeChild(elem);
+}
 async function share(){
-	navigator.clipboard.writeText(window.location.href + "?share")
+	//navigator.clipboard.writeText(window.location.href + "?share")
+	copyToClipboard(decodeURI(window.location.href + "?share"))
 	await Success("Ссылка скопирована!")
 }
 
