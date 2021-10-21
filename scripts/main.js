@@ -1,3 +1,6 @@
+server = 'https://nure-cards.herokuapp.com'
+
+
 function copyToClipboard(text) {
 	const elem = document.createElement('textarea');
 	elem.value = text;
@@ -11,9 +14,28 @@ async function share(){
 	copyToClipboard(decodeURI(window.location.href + "?share"))
 	await Success("Ссылка скопирована!")
 }
-
-
-server = 'https://nure-cards.herokuapp.com'
+async function share_short(){
+	let xhr = new XMLHttpRequest();
+	xhr.open("POST", `${server}/short_link`)
+	xhr.timeout = 3000;
+	xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+	xhr.send(JSON.stringify({
+		'link': decodeURI(window.location.href + "?share"),
+	}))
+	xhr.onload = async function() {
+		if (xhr.status != 200){await Error("Ошибка создания ссылки!")}
+		else{
+			answer = JSON.parse(xhr.response)
+			if (!answer.successfully){await Error("Ошибка создания ссылки!")}
+			else{
+				copyToClipboard(answer.link)
+				await Success("Ссылка скопирована!")
+			}			
+		}
+	}
+	xhr.ontimeout = async function() {await Error("Ошибка создания ссылки!")};
+	xhr.onerror = async function() {await Error("Ошибка создания ссылки!")};
+}
 
 async function server_status(){
 	if (menu_active){
