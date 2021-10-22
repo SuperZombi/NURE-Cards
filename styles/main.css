@@ -138,26 +138,11 @@ body{
 }
 
 
-
-textarea{
+.CodeMirror {
 	margin-top: 5px;
-	text-align: center;
-	background: #1B1B1B;
-	word-wrap: break-word;
-	box-decoration-break: clone;
-	padding: .1rem .3rem .2rem;
-	border-radius: .2rem;
-	resize: none;
-	outline: none;
-	border: none;
-	color: white;
-	font-family: monospace;
-	font-size: inherit;
-	width: 90%;
-	height: 100%;
 	border-radius: 5px;
+	font-size: 12pt;
 }
-
 
 
 details{
