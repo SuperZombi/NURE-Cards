@@ -373,6 +373,9 @@ hr{
 		display: block;
 		text-align: center;
 	}
+	details{
+		width: 85%;
+	}
 	#menu{
 		width: 100%;
 		left: 0;
