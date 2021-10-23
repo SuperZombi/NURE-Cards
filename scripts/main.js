@@ -693,6 +693,8 @@ window.onload = async function(){
 	Object.keys(details).forEach(function (key){
 		details[key].onclick = function(){return false;}
 	})
+
+	setTimeout(function(){window.scrollTo(0, 0)}, 0)
 }
 function check_scroll() {
 	ads_ = document.getElementById("ads").style;
