@@ -143,6 +143,7 @@ body{
 	border-radius: 5px;
 	font-size: 12pt;
 	padding: .1rem .3rem .2rem;
+	margin: auto;
 }
 
 
@@ -375,7 +376,7 @@ hr{
 		text-align: center;
 	}
 	details{
-		width: 85%;
+		width: 88%;
 	}
 	#menu{
 		width: 100%;
