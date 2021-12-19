@@ -1,4 +1,4 @@
-server = 'https://nure-cards.superzombi.repl.co'
+server = 'https://nure-cards.herokuapp.com'
 
 function _404(){
 	document.getElementById("not_found").style.display = "block"
