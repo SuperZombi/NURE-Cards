@@ -1,4 +1,4 @@
-server = 'https://nure-cards.superzombi.repl.co'
+server = 'https://nure-cards.herokuapp.com'
 
 
 function copyToClipboard(text) {
