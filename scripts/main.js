@@ -12,7 +12,7 @@ function copyToClipboard(text) {
 async function share(){
 	//navigator.clipboard.writeText(window.location.href + "?share")
 	copyToClipboard(decodeURI(window.location.href + "?share"))
-	await Success("Ссылка скопирована!")
+	await notice.Success("Ссылка скопирована!")
 }
 async function share_short(){
 	let xhr = new XMLHttpRequest();
@@ -23,18 +23,18 @@ async function share_short(){
 		'link': decodeURI(window.location.href + "?share"),
 	}))
 	xhr.onload = async function() {
-		if (xhr.status != 200){await Error("Ошибка создания ссылки!")}
+		if (xhr.status != 200){await notice.Error("Ошибка создания ссылки!")}
 		else{
 			answer = JSON.parse(xhr.response)
-			if (!answer.successfully){await Error("Ошибка создания ссылки!")}
+			if (!answer.successfully){await notice.Error("Ошибка создания ссылки!")}
 			else{
 				copyToClipboard(answer.link)
-				await Success("Ссылка скопирована!")
+				await notice.Success("Ссылка скопирована!")
 			}			
 		}
 	}
-	xhr.ontimeout = async function() {await Error("Ошибка создания ссылки!")};
-	xhr.onerror = async function() {await Error("Ошибка создания ссылки!")};
+	xhr.ontimeout = async function() {await notice.Error("Ошибка создания ссылки!")};
+	xhr.onerror = async function() {await notice.Error("Ошибка создания ссылки!")};
 }
 
 async function server_status(){
@@ -214,23 +214,23 @@ async function save_card_root(){
 	xhr.send(json)
 	xhr.onload = async function() {
 		if (xhr.status != 200){
-			await Error("Ошибка сервера!")
+			await notice.Error("Ошибка сервера!")
 		}
 		else{
 			answer = JSON.parse(xhr.response)
 			if (!answer.successfully){
-				await Error("Ошибка!")
+				await notice.Error("Ошибка!")
 			}
 			else{
-				await Success("Сохранено!")
+				await notice.Success("Сохранено!")
 			}
 		}
 	}
 	xhr.ontimeout = async function() {
-		await Error("Ошибка сервера!")
+		await notice.Error("Ошибка сервера!")
 	};
 	xhr.onerror = async function() {
-		await Error("Ошибка сервера!")
+		await notice.Error("Ошибка сервера!")
 	};
 }
 async function save_card(){
@@ -250,12 +250,12 @@ async function save_card(){
 				xhr1.send(json1)
 				xhr1.onload = async function() {
 					if (xhr1.status != 200){
-						await Error("Ошибка сервера!")
+						await notice.Error("Ошибка сервера!")
 					}
 					else{
 						answer1 = JSON.parse(xhr1.response)
 						if (answer1.exist){
-							await Warning("Такая карточка уже существует!</br>Заменить?", false, [['Да', save_card_root], 'Нет'])
+							await notice.Warning("Такая карточка уже существует!</br>Заменить?", false, [['Да', save_card_root], 'Нет'])
 						}
 						else{
 							save_card_root()
@@ -263,22 +263,22 @@ async function save_card(){
 					}
 				}
 				xhr1.ontimeout = async function() {
-					await Error("Ошибка сервера!")
+					await notice.Error("Ошибка сервера!")
 				};
 				xhr1.onerror = async function() {
-					await Error("Ошибка сервера!")
+					await notice.Error("Ошибка сервера!")
 				};
 			}
 			else{
-				await Error("У карточки нет картинки!")
+				await notice.Error("У карточки нет картинки!")
 			}
 		}
 		else{
-			await Error("У карточки нет названия!")
+			await notice.Error("У карточки нет названия!")
 		}
 	}
 	else{
-		await Error("Войдите в аккаунт!")
+		await notice.Error("Войдите в аккаунт!")
 	}
 }
 
@@ -372,7 +372,7 @@ function load_args(){
 		xhr.send(json)
 		xhr.onload = async function() {
 			if (xhr.status != 200){
-				await Error("Ошибка сервера!")
+				await notice.Error("Ошибка сервера!")
 				if (!args.hasOwnProperty("share")){window.location.hash = ""}
 			}
 			else{
@@ -388,17 +388,17 @@ function load_args(){
 					}
 				}
 				else{
-					await Error("Карточка не найдена!", false)
+					await notice.Error("Карточка не найдена!", false)
 					if (!args.hasOwnProperty("share")){window.location.hash = ""}	
 				}
 			}
 		}
 		xhr.ontimeout = async function() {
-			await Error("Ошибка сервера!")
+			await notice.Error("Ошибка сервера!")
 			if (!args.hasOwnProperty("share")){window.location.hash = ""}	
 		};
 		xhr.onerror = async function() {
-			await Error("Ошибка сервера!")
+			await notice.Error("Ошибка сервера!")
 			if (!args.hasOwnProperty("share")){window.location.hash = ""}	
 		};
 	}
@@ -649,7 +649,7 @@ async function close_menu(){
 characteristics = []
 pasives = []
 window.onload = async function(){
-	notifications_element = document.getElementById('notifications')
+	notice = Notification('#notifications');
 	
 	first_time = true;
 	await load_args()
