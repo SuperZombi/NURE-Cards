@@ -190,10 +190,10 @@ async function share(){
 	temp = val.substring(val.lastIndexOf('/')+1,val.length)
 	href = window.location.href.split(temp)[0] + "index.html#" + "?user=" + user + "?card=" + current_show
 	copyToClipboard(decodeURI(href + "?share"))
-	await Success("Ссылка скопирована!", 3000)
+	await notice.Success("Ссылка скопирована!", 3000)
 }
 async function confirm_delete(){
-	await Warning("Удалить?", false, [['Да', delete_], 'Нет'])
+	await notice.Warning("Удалить?", false, [['Да', delete_], 'Нет'])
 }
 async function delete_(){
 	let name = localStorage.getItem('name');
@@ -213,28 +213,28 @@ async function delete_(){
 				if(JSON.parse(xhr.response)['successfully']){
 					current_show_obj.remove()
 					hide()
-					await Success("Удалено!", 3000)
+					await notice.Success("Удалено!", 3000)
 					ckeck_none()
 				}
 				else{
-					await Error("Ошибка!")
+					await notice.Error("Ошибка!")
 				}	
 			}
 			else{
-				await Error("Ошибка сервера!")
+				await notice.Error("Ошибка сервера!")
 			}
 		}
 		xhr.ontimeout = async function() {
-			await Error("Ошибка сервера!")
+			await notice.Error("Ошибка сервера!")
 		};
 		xhr.onerror = async function() {
-			await Error("Ошибка сервера!")
+			await notice.Error("Ошибка сервера!")
 		};	
 	}
 }
 
 
 window.onload = function() {
-	notifications_element = document.getElementById('notifications')
+	notice = Notification('#notifications');
 	load_args()
 }
