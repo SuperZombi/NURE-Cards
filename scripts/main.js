@@ -3,7 +3,7 @@ server = 'https://nure-cards.herokuapp.com'
 
 function copyToClipboard(text) {
 	const elem = document.createElement('textarea');
-	elem.value = text;
+	elem.value = text.replace(" ", "%20");
 	document.body.appendChild(elem);
 	elem.select();
 	document.execCommand('copy');
