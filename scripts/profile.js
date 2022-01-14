@@ -169,6 +169,61 @@ function hide(){
 		pr_name.style.display = "none"
 	}, 400)
 }
+
+async function share_short(){
+	let json = JSON.stringify({
+		'user': document.getElementById("user_name").innerHTML,
+		'card': current_show
+	});
+	let xhr = new XMLHttpRequest();
+	xhr.open("POST", `${server}/get_card`)
+	xhr.timeout = 5000;
+	xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+	xhr.send(json)
+	xhr.onload = async function() {
+		if (xhr.status != 200){
+			await notice.Error("Ошибка сервера!")
+		}
+		else{
+			answer = JSON.parse(xhr.response)
+			if (answer.successfully){
+				val = window.location.href
+				temp = val.substring(val.lastIndexOf('/')+1,val.length)
+				href_ = window.location.href.split(temp)[0] + "index.html#" + answer.card_body + "?share"
+
+				let xhr2 = new XMLHttpRequest();
+				xhr2.open("POST", `${server}/short_link`)
+				xhr2.timeout = 3000;
+				xhr2.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+				xhr2.send(JSON.stringify({
+					'link': decodeURI(href_),
+				}))
+				xhr2.onload = async function() {
+					if (xhr2.status != 200){await notice.Error("Ошибка создания ссылки!")}
+					else{
+						answer_ = JSON.parse(xhr2.response)
+						if (!answer_.successfully){await notice.Error("Ошибка создания ссылки!")}
+						else{
+							copyToClipboard(answer_.link)
+							await notice.Success("Ссылка скопирована!")
+						}			
+					}
+				}
+				xhr2.ontimeout = async function() {await notice.Error("Ошибка создания ссылки!")};
+				xhr2.onerror = async function() {await notice.Error("Ошибка создания ссылки!")};
+			}
+			else{
+				await notice.Error("Карточка не найдена!", false)	
+			}
+		}
+	}
+	xhr.ontimeout = async function() {
+		await notice.Error("Ошибка сервера!")
+	};
+	xhr.onerror = async function() {
+		await notice.Error("Ошибка сервера!")
+	};
+}
 async function open_in_editor(){
 	user = document.getElementById("user_name").innerHTML
 	val = window.location.href
