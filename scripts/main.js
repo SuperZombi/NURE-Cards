@@ -655,7 +655,7 @@ async function close_menu(){
 characteristics = []
 pasives = []
 window.onload = async function(){
-	notice = Notification('#notifications');
+	notice = new Notifications('#notifications');
 	
 	first_time = true;
 	await load_args()
