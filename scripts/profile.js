@@ -1,4 +1,5 @@
-server = 'https://nure-cards.herokuapp.com'
+//server = 'https://nure-cards.herokuapp.com'
+server = 'https://nure-cards.superzombi.repl.co'
 
 function _404(){
 	document.getElementById("not_found").style.display = "block"
@@ -296,6 +297,6 @@ async function delete_(){
 
 
 window.onload = function() {
-	notice = Notification('#notifications');
+	notice = new Notifications('#notifications');
 	load_args()
 }

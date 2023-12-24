@@ -1,5 +1,5 @@
-server = 'https://nure-cards.herokuapp.com'
-
+//server = 'https://nure-cards.herokuapp.com'
+server = 'https://nure-cards.superzombi.repl.co'
 
 function replaceURI(text){
 	let t = text.replaceAll(" ", "%20");
