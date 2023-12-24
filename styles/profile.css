@@ -43,9 +43,12 @@ rav:before{
 		margin: 10px 0 5px 0 !important;
 		font-size: 22pt !important;
 	}
+	#user_cards{
+		gap: 10px !important;
+	}
 	.card{
-		width: 220px !important;
-		height: 300px !important;
+		width: 160px !important;
+		height: 240px !important;
 	}
 	#card_previewer_name{
 		font-size: 20pt !important;
@@ -55,6 +58,14 @@ rav:before{
 		left: 2px;
 		margin-left: auto;
 		margin-right: auto;
+	}
+	.img_zone{
+		height: 140px !important;
+		width: 140px !important;
+	}
+	.card:hover .img_zone{
+		height: 120px !important;
+		width: 120px !important;
 	}
 }
 
@@ -147,10 +158,11 @@ body{
 
 
 #user_cards{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    flex-direction: row;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	flex-direction: row;
+	gap: 20px;
 }
 .card{
 	display: inline-block;
@@ -162,18 +174,14 @@ body{
 	overflow: hidden;
 	cursor: pointer;
 	transition: 0.3s;
-	margin: 10px;
 }
 .card:hover{
 	border-radius: 30px;
 }
 .card:hover .img_zone{
-	height: 152px;
-	width: 152px;
+	height: 155px;
+	width: 155px;
 	border-radius: 40%;
-}
-.card:hover .img_zone img{
-	width: 152px;
 }
 .img_zone{
 	margin: 15px auto;
@@ -184,9 +192,7 @@ body{
 	transition: 0.3s;
 }
 .img_zone img{
-	width: 180px;
-	transform: scale(1.1);
-	transition: 0.3s;
+	width: 100%;
 }
 .card_name{
 	padding: 0 5px;
@@ -200,7 +206,7 @@ body{
 	display: none;
 	height: 80px;
 	justify-content: center;
-    align-items: center;
+	align-items: center;
 	transform: translateY(100%);
 	width: 100%;
 	left: 0;

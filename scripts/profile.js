@@ -32,7 +32,7 @@ function ckeck_none(){
 	}
 }
 function load_cards(user) {
-	document.getElementById("user_cards").innerHTML = `<div class="card loading"></div>`.repeat(5)
+	document.getElementById("user_cards").innerHTML = `<div class="card loading"></div>`.repeat(3)
 	let xhr = new XMLHttpRequest();
 	xhr.open("POST", `${server}/user_cards`)
 	xhr.timeout = 5000;
