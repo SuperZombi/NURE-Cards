@@ -5,6 +5,7 @@ function replaceURI(text){
 	let t = text.replaceAll(" ", "%20");
 	t = t.replaceAll("<", "%3C");
 	t = t.replaceAll(">", "%3E");
+	t = t.replaceAll("\\", "%5C");
 	return t;
 }
 function copyToClipboard(text) {
